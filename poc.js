@@ -28,6 +28,11 @@
  	mem0[4] = mem1;
  }
 
+function sleep(time){
+	var done = false;
+	setTimeout(function(){done=true;}, time);
+	while(!done){}
+}
 
  // This u2d code seems to be taken from a PoC for PSA-2013-0903.
  // wraps two uint32s into double precision
@@ -212,6 +217,8 @@ for (var i = 0; i < 0x1000; i++){
 				alert('found structID for Uint32Array = '+structID);
 				alert('stale[0] is now: '+stale[0]);
 				
+				sleep(5000);
+				alert("busywaited for 5 seconds");
 				setTimeout(function(){
 					alert("5 seconds up");
 					var a = stale[1];
