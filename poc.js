@@ -173,8 +173,8 @@ for (var i = 0; i < 0x1000; i++){
 				
                        		
 				//alert("Pushed stale");
-				var original_val = bufs[i][k];
-				var original_val1 = bufs[i][k+1];
+				original_val = bufs[i][k];
+				original_val1 = bufs[i][k+1];
 				
 				dgc();
 				dgc();
