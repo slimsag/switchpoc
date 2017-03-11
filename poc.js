@@ -70,10 +70,12 @@ dgc = function() {
  }
 
 // I dont know why hes doing this.
+/*
 for (var i = 0; i < 0x1000; i++){
 	var a = new Uint32Array(1);
 	a[i.toString(16)] = 1337;
 }
+*/
 
 
  function allocbufptrs() {
