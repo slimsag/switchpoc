@@ -5,7 +5,7 @@
  var mem1 = 0;
  var mem2 = 0;
  var pressure = new Array(100);
- var bufs = new Array(10000);
+ var bufs = new Array(100);
  var print = alert;
  _dview = null;
 
