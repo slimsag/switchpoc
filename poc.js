@@ -88,7 +88,7 @@ for (var i = 0; i < 0x1000; i++){
 	 
 	// Create 0x200 FFFF:0000:4141:4141 integer objects
  	for (i = 0; i < bufs.length; i++) {
- 		bufs[i] = new Uint32Array(0x100 * 2)
+ 		bufs[i] = new Uint32Array((0x100 * 2)/4) //0x100 * 2
  		for (k = 0; k < bufs[i].length;) {
  			bufs[i][k++] = 0x41414141;
  			bufs[i][k++] = 0xffff0000;
