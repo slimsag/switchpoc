@@ -170,7 +170,7 @@ for (var i = 0; i < 0x1000; i++){
                        		
 				//alert("Pushed stale");
 				var original_val = bufs[i][k];
-				//var original_val1 = bufs[i][k+1];
+				var original_val1 = bufs[i][k+1];
 				
 				bufs.push(stale);
 				stale[0] = fc;
