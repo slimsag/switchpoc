@@ -187,7 +187,7 @@ for (var i = 0; i < 0x1000; i++){
  	
 	 
 	if(before_len != stale.length){
-		alert("Exploit Worked v2");
+		alert("Exploit Worked v3");
 	} else {
 		alert("Exploit Failed");
 		return;
