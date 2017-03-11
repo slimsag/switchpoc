@@ -238,7 +238,7 @@ for (var i = 0; i < 0x1000; i++){
  			}
  		}
  	}
-	alert("Done executing. Did anything happen?")
+	alert("Done1 executing. Did anything happen?")
  	setTimeout(function() {
                 document.location.reload();
          }, 500);
