@@ -217,7 +217,7 @@ for (var i = 0; i < 0x1000; i++){
 				alert('found structID for Uint32Array = '+structID);
 				alert('stale[0] is now: '+stale[0]);
 				
-				sleep(5000);
+				sleep(2000);
 				alert("busywaited for 5 seconds");
 				setTimeout(function(){
 					alert("5 seconds up");
