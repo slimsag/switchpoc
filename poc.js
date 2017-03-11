@@ -166,7 +166,7 @@ for (var i = 0; i < 0x1000; i++){
 				structID = 100;
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
-				    'b': {}, //u2d(0, 0), // Butterfly ptr
+				    'b': {1:1, 2:2, 3:3, 4:4, 5:5, 6:6}, //u2d(0, 0), // Butterfly ptr
 				    'c': smsh, // var smsh = new Uint32Array(0x10)
 				    'd': u2d(0x100, 0)
 				}
