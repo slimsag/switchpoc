@@ -13,6 +13,10 @@
  var fcp = 0;
  var smsh = new Uint32Array(0x10)
  
+ 
+var original_val = 0;
+var original_val1 = 0;
+ 
  var mem0 = 0;
  var mem1 = 0;
  var mem2 = 0;
