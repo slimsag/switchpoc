@@ -162,8 +162,10 @@ for (var i = 0; i < 0x1000; i++){
 				    'c': smsh, // var smsh = new Uint32Array(0x10)
 				    'd': u2d(0x100, 0)
 				}
+				
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
+				alert("Raw:" + bufs[i][k].toString(16));
 				while(!(stale[0] instanceof Uint32Array)) {
 				    structID++;
 				    stale[1]['a'] = u2d(structID, 0);
