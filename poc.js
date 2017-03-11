@@ -177,7 +177,7 @@ function dgc() {
  	
 	 
 	if(before_len != stale.length){
-		alert("Exploit Worked");
+		alert("Exploit Worked v2");
 	} else {
 		alert("Exploit Failed");
 		return;
