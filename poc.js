@@ -260,6 +260,12 @@ for (var i = 0; i < 0x1000; i++){
  					smashed(stale[0]);
  				}
 				*/
+				setTimeout(function(){
+					alert("5 seconds up");
+					var a = stale[1];
+					var b = a;
+					alert("b == null: " + b === null);
+				}, 5000);
  				return;
  			}
  		}
