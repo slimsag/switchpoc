@@ -28,12 +28,14 @@
  	mem0[4] = mem1;
  }
 
-function sleep(time){
-	var done = false;
-	setTimeout(function(){done=true;}, time);
-	while(!done){}
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
-
  // This u2d code seems to be taken from a PoC for PSA-2013-0903.
  // wraps two uint32s into double precision
  _dview = null;
