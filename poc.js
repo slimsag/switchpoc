@@ -271,6 +271,7 @@ for (var i = 0; i < 0x1000; i++){
  }
 
 function go() {
+    alert("ready?");
     dgc();
     dgc();
     dgc();
