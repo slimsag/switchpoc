@@ -267,7 +267,7 @@ for (var i = 0; i < 0x1000; i++){
  }
 
 function go() {
-    status('getting ready!');
+    alert("getting ready!");
     dgc();
     dgc();
     dgc();
@@ -278,4 +278,3 @@ function go() {
 }
 setTimeout(go, 5000);
 
-go();
