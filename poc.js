@@ -3,7 +3,7 @@
 // and lookout PoC code.
 
 
- var bufs = new Array(5000);
+ var bufs = new Array(100);
  var stale = 0;
 
 
