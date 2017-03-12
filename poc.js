@@ -193,11 +193,11 @@ function go_() {
 				//alert("Leaked function pointer:" + fcp)
 
 
-				//alert("Pushed stale");
+				
 				//var original_val = bufs[i][k];
 				//var original_val1 = bufs[i][k+1];
-
-				//bufs.push(stale);
+				alert("Pushed stale");
+				bufs.push(stale);
 				stale[0] = fc;
 				fcp = bufs[i][k];
 				structID = 100;
