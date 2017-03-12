@@ -73,10 +73,12 @@ dgc = function() {
 }
 
 // I dont know why hes doing this.
+/*
 for(var i = 0; i < 0x1000; i++) {
 	var a = new Uint32Array(1);
 	a[i.toString(16)] = 1337;
 }
+*/
 
 
 function allocbufptrs() {
@@ -155,7 +157,7 @@ function go_() {
 	}
 	
 	// For some reason improves stability
-	sleep(1000);
+	//sleep(1000);
 
 	if(stale[0] != 0x41414141){
 		alert("stale[0] != 0x41414141");
