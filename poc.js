@@ -152,6 +152,11 @@ function go_() {
 	// For some reason improves stability
 	sleep(1000);
 
+	if(stale[0] != 0x41414141){
+		alert("stale[0] != 0x41414141");
+		return;
+	}
+	
 	stale[0] += 0x101;
 
 
