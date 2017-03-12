@@ -14,7 +14,7 @@ var smsh = new Uint32Array(0x10)
 var props = {};
 var stale = 0;
 var target = [];
-setTimeout(function(){alert("Target has been around for 10 minutes" + target + props)}, 10*60*1000);
+setTimeout(function(){alert("Target has been around for 10 minutes" + target + props + stale)}, 10*60*1000);
 
 var mem0 = 0;
 var mem1 = 0;
