@@ -245,7 +245,7 @@ function go_() {
 			}
 		}
 	}
-	alert("Done1 executing. Did anything happen?")
+	alert("Done2 executing. Did anything happen?")
 	setTimeout(function() {
 		document.location.reload();
 	}, 500);
