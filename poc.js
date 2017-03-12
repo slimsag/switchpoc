@@ -166,7 +166,7 @@ function go_() {
 	
 	//stale[0] += 0x101;
 	alert("before gc");
-	dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();
+	dgc();
 	alert("after gc");
 	
 	return;
