@@ -15,11 +15,9 @@ function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
 var props = {};
-var stale = 0;
-var target = [];
 keep(props);
-keep(stale);
-keep(target);
+//keep(stale);
+//keep(target);
 
 
 
@@ -151,8 +149,11 @@ function go_() {
 		after: {value: 666}
 	};
 	
+	var target = [];
 	var before_len = arr.length;
 	Object.defineProperties(target, props);
+	
+	var stale = 0;
 	stale = target.stale;
 
 	if(before_len != stale.length){
