@@ -230,6 +230,7 @@ function go_() {
 				*/
 
 				
+				alert("Accesing stale[0]" + stale[0] instaceof Uint32Array);
 				
 				alert("Orginal smsh len:" + smsh.length);
 				stale[0][6] = 0xffffffff; // Overide m_length field
