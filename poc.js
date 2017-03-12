@@ -145,7 +145,7 @@ function go_() {
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
 	} else {
-		alert("Exploit Failed");
+		//alert("Exploit Failed");
 		document.location.reload();
 	}
 	return;
