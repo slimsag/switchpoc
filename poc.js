@@ -180,6 +180,8 @@ function go_() {
 				dgc();
 				dgc();
 				dgc();
+				alert("GC in loop");
+				return;
 				
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
