@@ -162,6 +162,8 @@ function go_() {
 	
 	alert("before gc");
 	dgc();
+	dgc();
+	dgc();
 	alert("after gc");
 	return;
 	
