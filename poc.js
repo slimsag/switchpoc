@@ -177,6 +177,8 @@ function go_() {
 	dgc();
 	dgc();
 	alert("after gc");
+	sleep(1000);
+	alert("after sleep");
 	//return;
 	
 	stale[0] += 0x101;
