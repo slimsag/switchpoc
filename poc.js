@@ -158,6 +158,7 @@ function go_() {
 	}
 	
 	stale[0] += 0x101;
+	dgc();dgc();dgc();dgc();
 	alert("after this");
 	return;
 
