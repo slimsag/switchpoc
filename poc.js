@@ -158,6 +158,8 @@ function go_() {
 	}
 	
 	stale[0] += 0x101;
+	alert("after this");
+	return;
 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
 	// This will force JS to create a r/w/x block of memory, with raw machine code,
