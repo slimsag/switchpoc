@@ -165,17 +165,11 @@ function go_() {
 	dgc();
 	dgc();
 	dgc();
-		dgc();
 	dgc();
 	dgc();
-		dgc();
 	dgc();
 	dgc();
-		dgc();
-	dgc();
-	dgc();	dgc();
-	dgc();
-	dgc();
+
 	alert("after gc");
 	sleep(1000);
 	alert("after sleep");
