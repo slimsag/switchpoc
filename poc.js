@@ -160,7 +160,10 @@ function go_() {
 		document.location.reload();
 	}
 	
-	//return;
+	alert("before gc");
+	dgc();
+	alert("after gc");
+	return;
 	
 	stale[0] += 0x101;
 
