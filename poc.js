@@ -11,10 +11,11 @@ var fcp = 0;
 var smsh = new Uint32Array(0x10)
 
 // Trying to stop GC
+var stale = 0;
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
-var stale = 0;
+
 
 
 var mem0 = 0;
@@ -165,10 +166,12 @@ function go_() {
 	}
 	
 	//stale[0] += 0x101;
-	alert("before gc");
+	//alert("before gc");
 	//dgc();
-	alert("after gc");
+	//alert("after gc");
 	
+	
+	alert("before ret");
 	return;
 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
