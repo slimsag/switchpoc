@@ -157,7 +157,7 @@ function go_() {
 		document.location.reload();
 	}
 	
-	stale[0] += 0x101;
+	//stale[0] += 0x101;
 	dgc();dgc();dgc();dgc();
 	alert("after this");
 	return;
