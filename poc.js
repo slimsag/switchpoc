@@ -14,8 +14,8 @@ var smsh = new Uint32Array(0x10)
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
-var props = {};
-keep(props);
+
+//keep(props);
 //keep(stale);
 //keep(target);
 
@@ -134,7 +134,7 @@ function go_() {
 		allocbufptrs();
 		return 10;
 	};
-	props = {
+	var props = {
 		p0: {value: 0},
 		p1: {value: 1},
 		p2: {value: 2},
