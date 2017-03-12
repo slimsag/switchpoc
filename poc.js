@@ -148,6 +148,7 @@ function go_() {
 		alert("Exploit Failed");
 		document.location.reload();
 	}
+	return;
 	
 	stale[0] += 0x101;
 
