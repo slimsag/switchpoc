@@ -164,6 +164,17 @@ function go_() {
 	dgc();
 	dgc();
 	dgc();
+		dgc();
+	dgc();
+	dgc();
+		dgc();
+	dgc();
+	dgc();
+		dgc();
+	dgc();
+	dgc();	dgc();
+	dgc();
+	dgc();
 	alert("after gc");
 	return;
 	
