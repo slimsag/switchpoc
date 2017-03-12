@@ -11,8 +11,6 @@ var fcp = 0;
 var smsh = new Uint32Array(0x10)
 
 // Trying to stop GC
-var arr = new Array(0x100);
-var yolo = new ArrayBuffer(0x1000);
 var props = {};
 var stale = 0;
 var target = [];
@@ -120,6 +118,8 @@ function go_() {
 		return;
 	}
 	dgc();
+	var arr = new Array(0x100);
+	var yolo = new ArrayBuffer(0x1000);
 	arr[0] = yolo;
 	arr[1] = 0x13371337;
 	var not_number = {};
