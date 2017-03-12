@@ -1,6 +1,6 @@
 // Based on https://jbme.qwertyoruiop.com/
 // and lookout PoC code.
-var bufs = new Array(15000);
+var bufs = new Array(20000);
 var stale = 0;
 
 
