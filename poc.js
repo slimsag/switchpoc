@@ -158,6 +158,7 @@ function go_() {
 	} else {
 		//alert("Exploit Failed");
 		document.location.reload();
+		return;
 	}
 	
 	alert("before gc");
