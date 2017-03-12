@@ -168,7 +168,7 @@ function go_() {
 
 
 	alert("after gc");
-	sleep(1000);
+	//sleep(1000);
 	alert("after sleep");
 	//return;
 	
