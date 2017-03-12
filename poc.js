@@ -156,6 +156,9 @@ function go_() {
 		//alert("Exploit Failed");
 		document.location.reload();
 	}
+	alert("before gc");
+	
+	alert("after gc");
 	return;
 	
 	stale[0] += 0x101;
