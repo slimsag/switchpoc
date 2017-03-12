@@ -68,7 +68,7 @@ dgc = function() {
 		pressure[i] = new Uint32Array(0x10000);
 	}
 	for(var i = 0; i < pressure.length; i++) {
-		pressure[i] = 0x75757575;
+		pressure[i] = 0;
 	}
 }
 
