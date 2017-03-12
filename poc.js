@@ -161,6 +161,7 @@ function go_() {
 	} else {
 		//alert("Exploit Failed");
 		document.location.reload();
+		return;
 	}
 	
 	//stale[0] += 0x101;
