@@ -76,6 +76,7 @@ for(var i = 0; i < 0x1000; i++) {
 function allocbufptrs() {
 	if(bufs[0]) return;
 	dgc();
+	/*
 	dgc();
 	dgc();
 	dgc();
@@ -86,7 +87,8 @@ function allocbufptrs() {
 	dgc();
 	dgc();
 	dgc();
-
+	*/
+	
 	// Create 0x200 FFFF:0000:4141:4141 integer objects
 	for(i = 0; i < bufs.length; i++) {
 		bufs[i] = new Uint32Array(0x100 * 2)
