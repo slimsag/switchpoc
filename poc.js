@@ -253,7 +253,7 @@ function go_() {
 }
 
 function go() {
-	alert("ready?");
+	//alert("ready?");
 	dgc();
 	dgc();
 	dgc();
