@@ -11,10 +11,17 @@ var fcp = 0;
 var smsh = new Uint32Array(0x10)
 
 // Trying to stop GC
+function keep(x) {
+	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
+}
 var props = {};
 var stale = 0;
 var target = [];
-setTimeout(function(){alert("Target has been around for 10 minutes" + target + props + stale)}, 10*60*1000);
+keep(props);
+keep(stale);
+keep(target);
+
+
 
 var mem0 = 0;
 var mem1 = 0;
@@ -150,6 +157,7 @@ function go_() {
 
 	if(before_len != stale.length){
 		alert("Exploit Worked v3");
+		keep(arr);
 	} else {
 		//alert("Exploit Failed");
 		document.location.reload();
