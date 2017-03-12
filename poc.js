@@ -161,14 +161,14 @@ function go_() {
 		return;
 	}
 	
-	alert("before gc");
-	dgc();
-	dgc();
-	dgc();
+	//alert("before gc");
+	//dgc();
+	//dgc();
+	//dgc();
 
 
-	alert("after gc");
-	//sleep(1000);
+	//alert("after gc");
+	sleep(1000);
 	alert("after sleep");
 	//return;
 	
