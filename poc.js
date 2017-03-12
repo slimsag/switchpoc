@@ -156,8 +156,9 @@ function go_() {
 		//alert("Exploit Failed");
 		document.location.reload();
 	}
-	alert("before gc");
 	
+	alert("before gc");
+	dgc();
 	alert("after gc");
 	return;
 	
