@@ -119,8 +119,11 @@ function go_() {
 	}
 	dgc();
 	var arr = new Array(0x100);
-	var yolo = new ArrayBuffer(0x125);
-	arr[0] = yolo;
+	
+	arr[0] = 0x1;
+	//var yolo = new ArrayBuffer(0x125);
+	//arr[0] = yolo;
+	
 	//arr[1] = 0x13371337;
 	var not_number = {};
 	not_number.toString = function() {
