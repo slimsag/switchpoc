@@ -209,8 +209,8 @@ function go_() {
 				
 				// Adding new code here
 				//bck = stale[0][4];
-				//alert("3");
-				//alert("4");
+				alert("3");
+				alert("4");
 				
 				// Uncommenting this block comment breaks everything.
 				/*
