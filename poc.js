@@ -173,6 +173,7 @@ function go_() {
 				// Create fakeobj for fixing butterfly ptr
 				// comment 2
 				// comment 3
+				// comment 4
  				
 
 				stale[0] = {
