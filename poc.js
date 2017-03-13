@@ -213,9 +213,9 @@ function go_() {
 				*/
 
 				
-				alert("Accesing stale[0]");
-				var x = stale[0];
-				alert("Accesing stale[0]");
+				//alert("Accesing stale[0]");
+				//var x = stale[0];
+				//alert("Accesing stale[0]");
 				
 				alert("Orginal smsh len:" + smsh.length);
 				stale[0][6] = 0xffffffff; // Overide m_length field
