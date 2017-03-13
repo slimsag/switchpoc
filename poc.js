@@ -162,6 +162,15 @@ function go_() {
 		var f1 = 0;
 		var x = [];
 	}
+	
+	if(document != document){
+		for(var i = 0; i < 5; i++){
+			var x=0;
+		}
+		var fp = {};
+		var f1 = 0;
+		var x = [];
+	}
 
 	stale[0] += 0x101;
 
