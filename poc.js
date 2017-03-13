@@ -164,6 +164,10 @@ function go_() {
 		var fp = {};
 		var f1 = 0;
 		var x = [];
+		var y = {};
+		var z = [];
+		var z2 = [];
+		var z1 = function(){};
 	}
 
 	stale[0] += 0x101;
