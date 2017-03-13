@@ -187,6 +187,39 @@ function go_() {
 		var f5 = 0;
 		var y = [];
 	}
+	if(document != document){
+		for(var i = 0; i < 5; i++){
+			var x=0;
+		}
+		var fp = {};
+		var f1 = 0;
+		var x = [];
+	}
+	
+	if(document != document){
+		for(var i = 0; i < 5; i++){
+			var x=0;
+		}
+		var fx = {};
+		var f5 = 0;
+		var y = [];
+	}
+	if(document != document){
+		for(var i = 0; i < 5; i++){
+			var x=0;
+		}
+		var fx = {};
+		var f5 = 0;
+		var y = [];
+	}
+	if(document != document){
+		for(var i = 0; i < 5; i++){
+			var x=0;
+		}
+		var fx = {};
+		var f5 = 0;
+		var y = [];
+	}
 
 	stale[0] += 0x101;
 
