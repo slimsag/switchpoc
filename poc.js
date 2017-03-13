@@ -202,7 +202,7 @@ function go_() {
 				//alert("New smsh len:" + smsh.length);
 				
 				// Adding new code here
-				//bck = stale[0][4];
+				bck = stale[0][4];
 				
 				alert("3");
 				//alert("4");
