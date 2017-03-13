@@ -172,6 +172,7 @@ function go_() {
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
 				// comment 2
+				// comment 3
  				
 
 				stale[0] = {
