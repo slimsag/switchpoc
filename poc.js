@@ -150,6 +150,7 @@ function go_() {
 		return;
 	}
 	
+	sleep(1000);
 	if(document != document){
 		for(var i = 0; i < 5; i++){
 			var x=0;
