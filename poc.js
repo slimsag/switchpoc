@@ -15,6 +15,7 @@ function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
 var fakeobj = {};
+var fop = 0;
 
 var mem0 = 0;
 var mem1 = 0;
