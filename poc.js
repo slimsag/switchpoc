@@ -104,6 +104,12 @@ function smashed(stl) {
 	return 0;
 }
 
+if(document != document){
+	for(var i = 0; i < 5; i++){var x=0;}
+	var faadp = {};
+	var faf21 = 0;
+	var xtas = [];
+}
 
 
 function go_() {
@@ -249,6 +255,13 @@ function go() {
 	dgc();
 	dgc();
 	dgc();
+	if(document != document){
+		for(var i = 0; i < 5; i++){var x=0;}
+		var faadp = {};
+		var faf21 = 0;
+		var xtas = [];
+	}
+
 	setTimeout(go_, 400);
 }
 go();
