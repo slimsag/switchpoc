@@ -175,7 +175,7 @@ function go_() {
 				
 				// leak fakeobj pointer
 				stale[0] = fakeobj;
-				var fop = buf[i][k];
+				var fop = bufs[i][k];
 				
 
 				stale[0] = {
