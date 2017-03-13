@@ -209,6 +209,11 @@ function go_() {
 				
 				// Adding new code here
 				//bck = stale[0][4];
+				var foo = 1;
+				foo = 2;
+				foo = 3;
+				foo = 4;
+				foo = 5;
 				alert("3");
 				alert("4");
 				
