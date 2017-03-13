@@ -183,7 +183,7 @@ function go_() {
 			
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
-				
+				alert("2");
 				/*
 				Array internals:
 					void* JSCell
