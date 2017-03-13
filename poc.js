@@ -223,6 +223,7 @@ function go_() {
  				mem1 = bck;
  				mem2 = smsh;
  				bufs.push(stale)
+				alert("Got past main portion");
 				
 				/*
 				    1. Create an empty object. The structure of this object will describe
