@@ -14,7 +14,7 @@ var smsh = new Uint32Array(0x10)
 function keep(x) {
 	setTimeout(function() { alert("shit" + x) }, 10*60*1000);
 }
-
+var fakeobj = {};
 
 var mem0 = 0;
 var mem1 = 0;
